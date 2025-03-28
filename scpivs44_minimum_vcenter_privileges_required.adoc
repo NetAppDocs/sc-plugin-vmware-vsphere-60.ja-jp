@@ -1,0 +1,66 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_minimum_vcenter_privileges_required.html 
+keywords:  
+summary: SnapCenter Plug-in for VMware vSphereの導入を開始する前に、最小限必要なvCenter Privilegesが揃っていることを確認してください。 
+---
+= vCenter Privilegesの最小要件
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+SnapCenter Plug-in for VMware vSphereの導入を開始する前に、最小限必要なvCenter Privilegesが揃っていることを確認してください。
+
+
+
+== vCenter Adminロールに必要なPrivileges
+
+Datastore.PowerLocateSpace Datastore.Browse Datastore.Delete Datastore.FileManagement Datastore.Move Extension.Register Extensionの更新Host.Config.AdvancedConfig Host.Config.Resources Host.Config.Config.Settings Host.Config.Config.Storage VirtualVirtualVirtualVirtualVirtualVMHost.Local.CreateVM Host.Local.DeleteVM Network.ReconfigVM Network.Assign Resource.Assign Resource.Assign Resource.Assign Resource.Assign Resource.Assign Resource.Assign Resource.Config.Assign Resource.Config.VM Resource.Config.VM Resource.Config.Config.Config.VM Resource.Config.VM Resource.Config.Datast.VM Resource.Config.Datast.Config.Datast.Datast.Datastoronymous仮想マシンの仮想マシンの仮想マシンの仮想マシンの仮想マシンの仮想マシンの仮想マシンの仮想マシンの仮想マシンの仮想マシンの仮想マシンの仮想マシンの仮想マシンの仮想マシンの仮想マシンの仮想マシンの仮想マシンの仮想マシンの仮想マシンの仮想マシンの仮想マシンのリソースのリソースの仮想マシンリソース
+
+
+
+== SnapCenter Plug-in for VMware vCenterに固有の必要な権限
+
+|===
+
+
+| * 特権 * | *ラベル* 
+
+
+| netappscv.Guest.RestoreFile | ゲストファイルのリストア 
+
+
+| netappSCV.Recovery.MountUnMount | マウント/アンマウント 
+
+
+| netappSCV.Backup.DeleteBackupJob | リソースグループ/バックアップを削除 
+
+
+| netappscv.Configure.ConfigureStorageSystems.Delete | ストレージシステムの削除 
+
+
+| netappSCV： 視聴する | 視聴する 
+
+
+| netappscv.Recovery.RecoverVM | VMのリカバリ 
+
+
+| netappSCV.Configure.ConfigureStorageSystems.AddUpdate | ストレージシステムを追加/変更 
+
+
+| netappscv.Backup.BackupNow | 今すぐバックアップ 
+
+
+| netappscv.Guest：設定 | ゲストの設定 
+
+
+| netappSCV.Configure.ConfigureSnapCenterServer | SnapCenterサーバの設定 
+
+
+| netappSCV.Backup.BackupScheduled | リソースグループを作成 
+|===

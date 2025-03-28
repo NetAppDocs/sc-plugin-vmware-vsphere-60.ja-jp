@@ -1,0 +1,41 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_back_up_the_snapcenter_plug-in_for_vmware_vsphere_mysql_database.html 
+keywords:  
+summary: SnapCenter Plug-in for VMware vSphereには、プラグインで実行されるすべてのジョブのメタデータを格納するMySQLデータベース（NSMデータベースとも呼ばれます）が含まれています。 このリポジトリは定期的にバックアップする必要があります。 
+---
+= SnapCenter Plug-in for VMware vSphere MySQLデータベースのバックアップ
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+SnapCenter Plug-in for VMware vSphereには、プラグインで実行されるすべてのジョブのメタデータを格納するMySQLデータベース（NSMデータベースとも呼ばれます）が含まれています。 このリポジトリは定期的にバックアップする必要があります。
+
+移行またはアップグレードを実行する前に、リポジトリもバックアップする必要があります。
+
+.開始する前に
+オンデマンドバックアップジョブがすでに実行されているときは、MySQLデータベースをバックアップするジョブを開始しないでください。
+
+.手順
+. VMware vSphere Clientで、SnapCenter Plug-in for VMware vSphereが配置されているVMを選択します。
+. 仮想アプライアンスの*サマリ*タブで*リモートコンソールの起動*またはWebコンソールの起動*をクリックして、メンテナンスコンソールウィンドウを開きます。
++
+image:scpivs44_image21.png["メンテナンスコンソールのウィンドウ"]
+
+. メインメニューから、オプション * 1 ）「 Application Configuration. * 」と入力します
+. [ アプリケーションの設定 ] メニューから、オプション *6 ）「 mysql backup and restore. * 」を入力します
+. [MySQL バックアップと復元の設定 ] メニューから、オプション * 1 ） [MySQL バックアップの設定 * ] を入力します。
+. プロンプトで、リポジトリのバックアップの場所、保持するバックアップの数、およびバックアップを開始する時刻を入力します。
++
+入力すると、すべての入力が保存されます。バックアップの保持数に達すると、新しいバックアップの実行時に古いバックアップが削除されます。
+
++
+
+TIP: リポジトリバックアップの名前は「 backup-<date> 」です。リポジトリのリストア機能では「backup」プレフィックスが検索されるため、変更しないでください。
+
+

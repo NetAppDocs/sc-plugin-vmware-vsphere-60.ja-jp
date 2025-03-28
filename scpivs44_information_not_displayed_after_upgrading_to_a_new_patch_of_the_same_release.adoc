@@ -1,0 +1,61 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_information_not_displayed_after_upgrading_to_a_new_patch_of_the_same_release.html 
+keywords:  
+summary: SnapCenter Plug-in for VMware vSphereを同じリリースの新しいパッチにアップグレードしたあと、最近のジョブやその他の情報がダッシュボードとジョブモニタに表示されないことがあります。 
+---
+= 同じリリースの新しいパッチにアップグレードしたあとに情報が表示されない
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+SnapCenter Plug-in for VMware vSphereを同じリリースの新しいパッチにアップグレードしたあと、最近のジョブやその他の情報がダッシュボードとジョブモニタに表示されないことがあります。
+
+同じリリースの新しいパッチにアップグレードする場合は、アップグレードまたは登録を行う前に、vCenter Web ServerでSnapCenter Plug-in for VMware vSphereのキャッシュをクリアし、サーバを再起動する必要があります。
+
+次の場合、プラグインのキャッシュがクリアされないと、最近のジョブはダッシュボードとジョブモニタに表示されません。
+
+* SnapCenter Plug-in for VMware vSphereはvCenterを使用して導入し、その後同じリリースのパッチにアップグレードしました。
+* SnapCenter VMware仮想アプライアンスはvCenter 1に導入しました。その後、このSnapCenter Plug-in for VMware vSphereを新しいvCenter2に登録しました。SnapCenter Plug-in for VMware vSphereの新しいインスタンスがパッチを使用して作成され、vCenter1に登録されます。ただし、パッチを適用せずに最初のSnapCenter Plug-in for VMware vSphereからキャッシュされたプラグインがvCenter1に残っているため、キャッシュをクリアする必要があります。
+
+
+キャッシュは、サーバのオペレーティングシステムのタイプに応じて、次の場所に配置されます。
+
+* vCenter Server Linuxアプライアンス
++
+`/etc/vmware/vsphere-client/vc-packages/vsphere-client-serenity/`
+
+* Windows OS
++
+`%PROGRAMFILES%/VMware/vSphere client/vc-packages/vsphere-client-serenity/`
+
+
+
+
+
+== キャッシュをクリアする前にアップグレード済みの場合の対処方法
+
+. SnapCenter Plug-in for VMware vSphere管理GUIにログインします。
++
+IPアドレスは、SnapCenter Plug-in for VMware vSphereの導入時に表示されます。
+
+. 左側のナビゲーションペインで * Configuration * をクリックし、 * Plug-in Details * セクションのサービスオプションをクリックしてプラグインを無効にします。
++
+SnapCenter Plug-in for VMware vSphereサービスが無効になり、vCenterで拡張機能の登録が解除されます。
+
+. フォルダを探し `vsphere-client-serenity` 、フォルダを見つけ `com.netapp.scv.client-<release-number>` て削除します。
++
+フォルダ名はリリースごとに変更されます。
+
+. vCenter Serverを再起動します。
+. VMware vSphere Clientにログインします。
+. 左側のナビゲーションペインで * Configuration * をクリックし、 * Plug-in Details * セクションのサービスオプションをクリックしてプラグインを有効にします。
++
+SnapCenter Plug-in for VMware vSphereサービスが有効になり、vCenterに拡張機能が登録されます。
+
+

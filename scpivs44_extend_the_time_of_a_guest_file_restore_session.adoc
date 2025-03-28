@@ -1,0 +1,28 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_extend_the_time_of_a_guest_file_restore_session.html 
+keywords:  
+summary: 'デフォルトでは、接続されたゲストファイルリストアVMDKは24時間使用可能であり、その後自動的に接続解除されます。[Guest Configuration] ページで時間を延長できます。' 
+---
+= ゲストファイルリストアセッションの時間を延長する
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+デフォルトでは、接続されたゲストファイルリストアVMDKは24時間使用可能であり、その後自動的に接続解除されます。[* Guest Configuration*] ページで時間を延長できます。
+
+.タスクの内容
+接続されたVMDKから追加のファイルやフォルダをあとでリストアする場合は、ゲストファイルのリストアセッションを拡張できます。ただし、ゲストファイルリストアセッションでは多くのリソースが使用されるため、セッション時間の延長は時折実行する必要があります。
+
+.手順
+. VMware vSphere Clientで、* Guest File Restore *をクリックします。
+. ゲストファイルの復元セッションを選択し、Guest Session MonitorのタイトルバーでExtend Selected Guest Sessionアイコンをクリックします。
++
+セッションはさらに24時間延長されます。
+
+

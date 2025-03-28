@@ -1,0 +1,72 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_how_restore_operations_are_performed.html 
+keywords:  
+summary: VMFS環境の場合、SnapCenter Plug-in for VMware vSphereは、Storage VMotionでクローンおよびマウント処理を使用してリストア処理を実行します。NFS環境では、標準のONTAP Single File SnapRestore（SFSR）を使用して、ほとんどのリストア処理を効率化します。VVOL VM の場合、このプラグインは ONTAP 単一ファイル Snapshot リストアおよび SnapMirror リストアをリストア処理に使用します。 
+---
+= リストア処理の実行方法
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+VMFS環境の場合、SnapCenter Plug-in for VMware vSphereは、Storage VMotionでクローンおよびマウント処理を使用してリストア処理を実行します。NFS環境では、標準のONTAP Single File SnapRestore（SFSR）を使用して、ほとんどのリストア処理を効率化します。VVOL VMの場合、プラグインはリストア処理にONTAP単一ファイルSnapshotリストア（ONTAP SFSR）とSnapMirrorリストアを使用します。次の表に、リストア処理の実行方法を示します。
+
+|===
+| リストア処理 | 開始 | を使用して実行 
+
+
+| VMとVMDK | プライマリバックアップ | NFS 環境： ONTAP 単一ファイル SnapRestore VMFS 環境： Storage VMotion を使用したクローン作成とマウント 
+
+
+| VMとVMDK | セカンダリバックアップ | NFS 環境： ONTAP 単一ファイル SnapRestore VMFS 環境： Storage VMotion を使用したクローン作成とマウント 
+
+
+| 削除されたVMとVMDK | プライマリバックアップ | NFS 環境： ONTAP 単一ファイル SnapRestore VMFS 環境： Storage VMotion を使用したクローン作成とマウント 
+
+
+| 削除されたVMとVMDK | セカンダリバックアップ | NFS 環境： Storage VMotion VMFS 環境でのクローン作成とマウント： Storage VMotion を使用したクローン作成とマウント 
+
+
+| VMとVMDK | VMと整合性のあるプライマリバックアップ | NFS 環境： ONTAP 単一ファイル SnapRestore VMFS 環境： Storage VMotion を使用したクローン作成とマウント 
+
+
+| VMとVMDK | VMと整合性のあるセカンダリバックアップ | NFS 環境： Storage VMotion VMFS 環境でのクローン作成とマウント： Storage VMotion を使用したクローン作成とマウント 
+
+
+| VVOL VM | crash-consistentプライマリバックアップ | すべてのプロトコルに対応するONTAP単一ファイルSnapRestore 
+
+
+| VVOL VM | crash-consistentセカンダリバックアップ | すべてのプロトコルでのONTAP SnapMirrorリストア 
+
+
+| FlexGroup VM | プライマリバックアップ  a| 
+NFS 環境： * ONTAP シングルファイル ONTAP SnapRestore バージョン 9.10.1 以降を使用している場合 * 以前のバージョンの ONTAP で Storage VMotion を使用してクローンおよびマウントします
+
+VMFS 環境： FlexGroup ではサポートされません
+
+
+
+| FlexGroup VM | セカンダリバックアップ  a| 
+NFS環境：
+
+* ONTAP バージョン 9.10.1 以降を使用している場合の ONTAP SnapMirror リストア
+* 以前のバージョンのStorage VMotion for ONTAPを使用したクローン作成とマウント
+
+
+VMFS 環境： FlexGroup ではサポートされません
+
+|===
+
+NOTE: VVolコンテナのリバランシング後にVVol VMをリストアすることはできません。
+
+ゲストファイルのリストア処理は、NFS環境とVMFS環境の両方で、クローンおよびマウント処理（Storage VMotionではない）を使用して実行されます。
+
+
+IMPORTANT: リストア処理中に、エラーが表示されることがあります。または、SnapCenter Plug-in for VMware vSphereがクローンの再署名を試みたときにこのエラーが発生することがあり `Host unresolved volumes is null` `Exception while calling pre-restore on SCV….Error mounting cloned LUN as datastore…` ます。VMwareの制限により、高度なESXiホスト構成では、SnapCenter Plug-in for VMware vSphereで自動再署名の値を制御できません。NVMe over TCPおよびNVMe over FCストレージでは、新しいサブシステムを追加したときにSCVでコントローラを動的に追加することはできません。マウント処理の前に、必要なマッピングを作成しておく必要があります。
+
+エラーの詳細については、を参照してください https://kb.netapp.com/mgmt/SnapCenter/SCV_clone_or_restores_fail_with_error_'Host_Unresolved_volumes_is_null'#["技術情報アーティクル：SCV clone or restores fail with error 'Host Unresolved volumes is Null"^] 。

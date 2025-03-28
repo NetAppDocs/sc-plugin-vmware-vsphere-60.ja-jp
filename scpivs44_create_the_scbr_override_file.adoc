@@ -1,0 +1,21 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_create_the_scbr_override_file.html 
+keywords:  
+summary: ' `scbr.override`構成ファイルは、SnapCenterアプリケーションベースのデータ保護処理をサポートする環境でSnapCenter Plug-in for VMware vSphereで使用されます。' 
+---
+= scbr.override構成ファイルを作成します。
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+ `scbr.override`構成ファイルは、SnapCenterアプリケーションベースのデータ保護処理をサポートする環境でSnapCenter Plug-in for VMware vSphereで使用されます。
+
+. に進みます `/opt/netapp/scvservice/standalone_aegis/etc/scbr/scbr.override-template`。
+. ディレクトリ内のという新しいファイルにファイルをコピーします `scbr.override-template` `scbr.override` `\opt\netapp\scvservice\standalone_aegis\etc\scbr` 。
+

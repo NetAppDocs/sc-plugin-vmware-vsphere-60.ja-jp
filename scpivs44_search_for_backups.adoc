@@ -1,0 +1,37 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_search_for_backups.html 
+keywords:  
+summary: リストアウィザードを使用して、VMまたはデータストアの特定のバックアップを検索できます。バックアップが見つかったら、リストアできます。 
+---
+= バックアップの検索
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+リストアウィザードを使用して、VMまたはデータストアの特定のバックアップを検索できます。バックアップが見つかったら、リストアできます。
+
+.手順
+. VMware vSphere ClientのGUIで、ツールバーの* Menu *をクリックし、次のいずれかを実行します。
++
+|===
+| バックアップを表示する対象 | 次の操作を実行します。 
+
+
+| VM | [*Hosts and Clusters*] メニューオプションをクリックし、仮想マシンを選択して、 [*Configure*] タブをクリックし、 SnapCenter Plug-in for VMware vSphere のセクション * で [*Backups] をクリックします。 
+
+
+| データストア | メニューオプション * Storage * をクリックし、データストアを選択して、 * Configure * タブをクリックし、 * SnapCenter Plug-in for VMware vSphere * セクションで * Backups * をクリックします。 
+|===
+. 左側のナビゲーションペインで、VMまたはデータストアを含むデータセンターを展開します。
+. オプション：VMまたはデータストアを右クリックし、ドロップダウンリストから* SnapCenter Plug-in for VMware vSphere *を選択し、2番目のドロップダウンリストから*リストア*を選択します。
+. * リストア * ウィザードで検索名を入力し、 * 検索 * をクリックします。
++
+バックアップリストをフィルタするには、フィルタアイコンを選択し、日時の範囲、VMware Snapshotを含むバックアップの有無、マウントの有無、および場所を選択します。[OK]*をクリックします。
+
+

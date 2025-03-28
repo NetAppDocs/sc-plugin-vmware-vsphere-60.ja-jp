@@ -1,0 +1,260 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_properties_you_can_override.html 
+keywords:  
+summary: 'コンフィギュレーションファイルにリストされているプロパティを使用して、デフォルト値を変更できます `scbr.override` 。' 
+---
+= オーバーライド可能なプロパティ
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+コンフィギュレーションファイルにリストされているプロパティを使用して、デフォルト値を変更できます `scbr.override` 。
+
+* デフォルトでは、テンプレートはハッシュ記号を使用して構成プロパティをコメント化します。プロパティを使用して設定値を変更するには、文字を削除する必要があり `#` ます。
+* 変更を有効にするには、SnapCenter Plug-in for VMware vSphereホストでサービスを再起動する必要があります。
+
+
+構成ファイルにリストされている次のプロパティを使用して、デフォルト値を変更でき `scbr.override` ます。
+
+* * dashboard.protected.vm.count.interval=7*
++
+ダッシュボードにVMの保護ステータスを表示する日数を指定します。
+
++
+デフォルト値は「7」です。
+
+* * disable.weakCiphers=true*
++
+SnapCenter Plug-in for VMware vSphereとSnapCenterの間の通信チャネルで次のweakCipherを無効にします `include.weakCiphers`。TLS_RSA_WITH_AES_256_CBC_SHA256 TLS_DHE_RSA_WITH_AES_256_CBC_SHA256
+
+* * global.ds].exclusion).pattern *を入力します
++
+バックアップ処理から除外する1つ以上の従来のデータストアまたはVVolデータストアを指定します。データストアは、任意の有効なJava正規表現を使用して指定できます。
+
++
+例1： `global.ds.exclusion.pattern=.*21` パターンが同じデータストアを除外します（例：やは除外されます） `datastore21` `dstest21` 。
+
++
+例2：式で `global.ds.exclusion.pattern=ds-.*|^vol123` は、を含む（など）またはで始まるすべてのデータストアが除外されます `ds-` `scvds-test` `vol123`。
+
+* * guestFileRestore.guest.operation.interval=5*
++
+SnapCenter Plug-in for VMware vSphereがゲスト処理（オンラインディスクおよびリストアファイル）の完了を監視する時間間隔（秒）です。合計待機時間は、およびで設定され `guestFileRestore.online.disk.timeout` `guestFileRestore.restore.files.timeout`ます。
+
++
+デフォルト値は「5」です。
+
+* * guestFileRestore.monitorInterval=30 *
++
+SnapCenter Plug-in for VMware vSphereが、期限切れのゲストファイルリストアセッションを監視する時間間隔（分）です。設定されたセッション時間を超えて実行されているセッションはすべて切断されます。
+
++
+デフォルト値は「30」です。
+
+* * guestFileRestore.online.disk.timeout=100*
++
+SnapCenter Plug-in for VMware vSphereが、ゲストVMでオンラインのディスク処理が完了するまで待機する時間（秒）です。プラグインがオンラインディスク処理の完了をポーリングするまでに、さらに30秒の待機時間があります。
+
++
+デフォルト値は「100」です。
+
+* * guestFileRestore.restore.files.timeout=3600 *
++
+SnapCenter Plug-in for VMware vSphereがゲストVMでファイルのリストア処理が完了するまで待機する時間（秒）です。時間を超過すると、プロセスは終了し、ジョブは失敗としてマークされます。
+
++
+デフォルト値は「3600」（1時間）です。
+
+* * guestFileRestore.Robocopy.directory.flags=/R:0/W:0/ZB/CopyAll/EFSRAW/A-:SH/E/NJH/NDL/NP)
++
+ゲストファイルのリストア処理中にディレクトリをコピーするときに使用する追加のRobocopyフラグを指定します。
+
++
+削除または追加しないで `/NJH` `/NJS` ください。これにより、リストア出力の解析が中断されます。
+
++
+失敗したコピーに対して無限の再試行が発生する可能性があるため、（フラグを削除して）無制限の再試行を許可しないで `/R` ください。
+
++
+デフォルト値はです `"/R:0 /W:0 /ZB /CopyAll /EFSRAW /A-:SH /e /NJH /NDL /NP"` 。
+
+* * guestFileRestore.Robocopy.file.flags=/R:0/W:0/ZB/CopyAll/EFSRAW/A-:SH/NJH/NDL/NP)
++
+ゲストファイルのリストア処理中に個 々 のファイルをコピーするときに使用する追加のRobocopyフラグを指定します。
+
++
+削除または追加しないで `/NJH` `/NJS` ください。これにより、リストア出力の解析が中断されます。
+
++
+失敗したコピーに対して無限の再試行が発生する可能性があるため、（フラグを削除して）無制限の再試行を許可しないで `/R` ください。
+
++
+デフォルト値はです `"/R:0 /W:0 /ZB /CopyAll /EFSRAW /A-:SH /NJH /NDL /NP"`。
+
+* * guestFileRestore.sessionTime=1440*
++
+SnapCenter Plug-in for VMware vSphereがゲストファイルのリストアセッションをアクティブにしておく時間（分）です。
+
++
+デフォルト値は「1440」（24時間）です。
+
+* * guestFileRestore.use.custom.online.disk.script=true*
++
+ゲストファイルリストアセッションの作成時に、ディスクのオンライン化およびドライブレターの取得にカスタムスクリプトを使用するかどうかを指定します。スクリプトはにある必要があります `[Install Path]  \etc\guestFileRestore_onlineDisk.ps1`。インストールにはデフォルトのスクリプトが用意されています。値 `[Disk_Serial_Number]`、 `[Online_Disk_Output]`、およびは、 `[Drive_Output]` 添付プロセス中にスクリプトで置き換えられます。
+
++
+デフォルト値は「false」です。
+
+* * include.esx.initiator.id.from.cluster=true*
++
+VMDKワークフローを介したアプリケーションで、クラスタ内のすべてのESXiホストのiSCSIイニシエータとFCPイニシエータのIDをSnapCenter Plug-in for VMware vSphereに含めるように指定します。
+
++
+デフォルト値は「false」です。
+
+* *暗号を含みなさい。weakCiphers *
++
+ `disable.weakCiphers`をに設定する `true`と、デフォルトで無効になる弱い暗号に加えて、無効にする弱い暗号を指定します `disable.weakCiphers` 。
+
+* * 最大同時 DS.storage.query.count=15 *
++
+SnapCenter Plug-in for VMware vSphereがデータストアのストレージフットプリントを検出するためにSnapCenterサーバに対して実行できる同時呼び出しの最大数です。これらの呼び出しは、SnapCenter Plug-in for VMware vSphere VMホストでLinuxサービスを再起動すると、プラグインによって実行されます。
+
+* * nfs.datastore.mount.retry.count= 3 *
++
+SnapCenter Plug-in for VMware vSphereがvCenterでボリュームをNFSデータストアとしてマウントする最大回数です。
+
++
+デフォルト値は「3」です。
+
+* * nfs.datastore.mount.retry.delay=60000*
++
+SnapCenter Plug-in for VMware vSphereが、vCenterでボリュームをNFSデータストアとしてマウントする試行の間隔（ミリ秒）です。
+
++
+デフォルト値は「60000」（60秒）です。
+
+* * script.virtual.machine.count.variable.name = VIRTUE_MACHINES*
++
+仮想マシン数を含む環境変数の名前を指定します。この変数は、バックアップジョブの実行時にユーザ定義スクリプトを実行する前に定義する必要があります。
+
++
+たとえば、virtual_machines=2と指定すると、2つの仮想マシンがバックアップされます。
+
+* * script.virtual.machine.info.variable.name=VIRTUAL_MACHINE.%s*
++
+バックアップ内のn番目の仮想マシンに関する情報を含む環境変数の名前です。この変数は、バックアップ時にユーザ定義スクリプトを実行する前に設定する必要があります。
+
++
+たとえば、環境変数virtual_machine.2は、バックアップ内の2番目の仮想マシンに関する情報を提供します。
+
+* * script.virtual.machine.info.format= %s|%s|%s|%s|%s*
++
+仮想マシンに関する情報を提供します。環境変数で設定されるこの情報の形式は次のとおりです。 `VM name|VM UUID| VM power state (on|off)|VM snapshot taken (true|false)|IP address(es)`
+
++
+指定できる情報の例を次に示します。
+
++
+`VIRTUAL_MACHINE.2=VM 1|564d6769-f07d-6e3b-68b1f3c29ba03a9a|POWERED_ON||true|10.0.4.2`
+
+* * storage.connection.timeout=600000 *
++
+SnapCenter サーバがストレージシステムからの応答を待機する時間をミリ秒単位で指定します。
+
++
+デフォルト値は「600000」（10分）です。
+
+* * vmware.esx.ip.kernel.ip.map*
++
+デフォルト値はありません。この値を使用して、ESXiホストのIPアドレスをVMkernelのIPアドレスにマッピングします。SnapCenter Plug-in for VMware vSphereは、デフォルトでESXiホストの管理VMkernelアダプタIPアドレスを使用します。SnapCenter Plug-in for VMware vSphereで別のVMkernelアダプタIPアドレスを使用する場合は、上書き値を指定する必要があります。
+
++
+次の例では、管理VMkernelアダプタIPアドレスは10.225.10.56ですが、SnapCenter Plug-in for VMware vSphereでは指定されたアドレス10.225.11.57と10.225.11.58が使用されます。管理VMkernelアダプタIPアドレスが10.225.10.60の場合、プラグインはアドレス10.225.11.61を使用します。
+
++
+`vmware.esx.ip.kernel.ip.map=10.225.10.56:10.225.11.57,10.225.11.58; 10.225.10.60:10.225.11.61`
+
+* * VMware. 最大同時スナップショット数 =30 *
++
+SnapCenter Plug-in for VMware vSphereがサーバで実行する同時VMwareスナップショットの最大数です。
+
++
+この数はデータストア単位でチェックされ、ポリシーで[VM consistent]が選択されている場合にのみチェックされます。crash-consistentバックアップを実行する場合、この設定は適用されません。
+
++
+デフォルト値は「30」です。
+
+* * vmware.max.concurrent.snapshots.delete=30*
++
+SnapCenter Plug-in for VMware vSphereがサーバで実行する、データストアあたりのVMwareスナップショットの同時削除処理の最大数です。
+
++
+この数はデータストア単位でチェックされます。
+
++
+デフォルト値は「30」です。
+
+* * vmware.query.unresolve.retry.count=10 *
++
+SnapCenter Plug-in for VMware vSphereが「...time limit for holding off I/O...」が原因で未解決のボリュームに関するクエリの送信を再試行する最大回数です。 エラー。
+
++
+デフォルト値は「10」です。
+
+* * vmware.quiesce .retry.count = 0 *
++
+SnapCenter Plug-in for VMware vSphereが、「...time limit for holding off I/O...」が原因でVMwareスナップショットに関するクエリの送信を再試行する最大回数です。 バックアップ中にエラーが発生しました。
+
++
+デフォルト値は「0」です。
+
+* * vmware.quiesce.retry.interval=5*
++
+SnapCenter Plug-in for VMware vSphereが、VMwareスナップショット「...time limit for holding off I/O...」に関するクエリの送信を待機する時間（秒）です。 バックアップ中にエラーが発生しました。
+
++
+デフォルト値は「5」です。
+
+* * vmware.query.unresolved.retry.delay= 60000 *
++
+SnapCenter Plug-in for VMware vSphereが「...time limit for holding off I/O...」が原因で未解決のボリュームに関するクエリを送信する間隔（ミリ秒）です。 エラー。このエラーは、VMFSデータストアのクローニング時に発生します。
+
++
+デフォルト値は「60000」（60秒）です。
+
+* * vmware.reconfig.vm.retry.count = 10 *
++
+SnapCenter Plug-in for VMware vSphereが、「...time limit for holding off I/O...」が原因でVMの再設定に関するクエリの送信を再試行する最大回数です。 エラー。
+
++
+デフォルト値は「10」です。
+
+* * vmware.reconfig.vm.retry.delay=30000*
++
+SnapCenter Plug-in for VMware vSphereが、「...time limit for holding off I/O...」が原因でVMの再設定に関するクエリを送信する間隔（ミリ秒）です。 エラー。
+
++
+デフォルト値は「30000」（30秒）です。
+
+* * vmware.rescan.HBA.retry.count= 3 *
++
+SnapCenter Plug-in for VMware vSphereが、「...time limit for holding off I/O...」が原因でホストバスアダプタの再スキャンに関するクエリを送信する間隔（ミリ秒）です。 エラー。
+
++
+デフォルト値は「3」です。
+
+* * vmware.rescan.hba.retry.delay=30000*
++
+SnapCenter Plug-in for VMware vSphereがホストバスアダプタの再スキャン要求を再試行する最大回数です。
+
++
+デフォルト値は「30000」です。
+
+

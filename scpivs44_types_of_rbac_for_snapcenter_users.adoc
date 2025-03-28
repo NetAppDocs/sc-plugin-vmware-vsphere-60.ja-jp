@@ -1,0 +1,62 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_types_of_rbac_for_snapcenter_users.html 
+keywords:  
+summary: SnapCenter Plug-in for VMware vSphereを使用している場合は、vCenter ServerによってさらにレベルのRBACが提供されます。このプラグインでは、vCenter Server RBACとONTAP RBACの両方がサポートされています。 
+---
+= SnapCenter Plug-in for VMware vSphereユーザ向けのRBACのタイプ
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+SnapCenter Plug-in for VMware vSphereを使用している場合は、vCenter ServerによってさらにレベルのRBACが提供されます。このプラグインでは、vCenter Server RBACとONTAP RBACの両方がサポートされています。
+
+
+
+== vCenter Server RBAC
+
+このセキュリティメカニズムは、SnapCenter Plug-in for VMware vSphereで実行されるすべてのジョブに適用されます。ジョブには、VM-consistent、VM crash-consistent、SnapCenter Server application-consistent（VMDK経由のアプリケーション）が含まれます。このレベルのRBACは、仮想マシン（VM）やデータストアなどのvSphereオブジェクトに対してSnapCenter Plug-in for VMware vSphereタスクを実行するvSphereユーザの権限を制限します。
+
+SnapCenter Plug-in for VMware vSphereを導入すると、vCenterでのSnapCenter処理用に次のロールが作成されます。
+
+`SCV Administrator`
+`SCV Backup`
+`SCV Guest File Restore`
+`SCV Restore`
+`SCV View`
+
+vSphere管理者は、次の手順でvCenter Server RBACを設定します。
+
+* ルートオブジェクト（ルートフォルダとも呼ばれます）に対するvCenter Serverアクセス許可を設定します。その後、アクセス許可が不要な子エンティティのアクセスを禁止することでセキュリティを強化できます。
+* Active DirectoryユーザにSCVロールを割り当てます。
++
+少なくとも、すべてのユーザがvCenterオブジェクトを表示できる必要があります。この権限がないと、ユーザはVMware vSphere Client GUIにアクセスできません。
+
+
+
+
+
+== ONTAP RBAC
+
+このセキュリティメカニズムは、SnapCenterサーバのアプリケーション整合性（VMDK経由のアプリケーション整合性）ジョブにのみ適用されます。このレベルでは、特定のストレージシステムに対して、データストアのストレージのバックアップなど、特定のストレージ処理をSnapCenterで実行する権限が制限されます。
+
+ONTAPおよびSnapCenter RBACを設定するには、次のワークフローを使用します。
+
+. ストレージ管理者は、Storage VM上で必要なPrivilegesを持つロールを作成します。
+. 次に、ストレージ管理者がそのロールをストレージユーザに割り当てます。
+. SnapCenter管理者は、そのストレージユーザ名を使用してSnapCenterサーバにStorage VMを追加します。
+. 次に、SnapCenter管理者がSnapCenterユーザにロールを割り当てます。
+
+
+
+
+== RBAC Privilegesノケンシヨウワアクフロオ
+
+次の図に、RBAC Privileges（vCenterとONTAPの両方）の検証ワークフローの概要を示します。
+
+image:scpivs44_image1.png["RBAC Privilegesノケンシヨウワアクフロオ"]

@@ -1,0 +1,65 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_rest_api_workflows__attach_and_detach_vmdks.html 
+keywords:  
+summary: SnapCenter Plug-in for VMware vSphere REST APIを使用してVMDKの接続および接続解除処理を実行するには、所定の順序でREST API呼び出しを実行する必要があります。 
+---
+= VMDKを接続および接続解除するREST APIワークフロー
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+SnapCenter Plug-in for VMware vSphere REST APIを使用してVMDKの接続および接続解除処理を実行するには、所定の順序でREST API呼び出しを実行する必要があります。
+
+各REST APIについて、REST APIの先頭にを追加し `\https://<server>:<port>` て完全なエンドポイントを形成します。
+
+
+
+== VMDKを接続するには、次のワークフローを実行します。
+
+|===
+| ステップ | REST API | コメント 
+
+
+| 1 | に移動 `\http://<vCenter-IP>/mob` | VMware Managed ObjectsのURLからVM MORefを検索します。VMDK を接続する VM の * MORef * をメモします。 
+
+
+| 2 | `/4.1/vm/{moref}/backups` | `Get VM Backups` 指定したVMのバックアップのリストを取得します。手順 1 から * MORef * を渡します。リストアするバックアップの * backupid * をメモします。 
+
+
+| 3 | `/4.1/vm/{moref}/backups/
+{backupId}/vmdklocations` | `Get VMDK Locations` 指定したVMのVMDKのリストを取得します。手順 2 の * backupid * と手順 1 の * moref * を渡します。*vmdkLocationsList* 情報に注意してください。 
+
+
+| 4 | `/4.1/vm/{moref}/attachvmdks`  a| 
+`Attach VMDKs` 指定したVMDKを元のVMに接続します。手順 2 の * backupid * と手順 1 の * moref * を渡します。* vmdkLocationList * を手順 3 から * vmdkLocations * 属性に渡します。
+
+
+NOTE: VMDKを別のVMに接続するには、alternateVmMoref属性にターゲットVMのMORefを渡します。
+
+|===
+
+
+== VMDKの接続を解除するには、次のワークフローを実行します。
+
+|===
+| ステップ | REST API | コメント 
+
+
+| 1 | に移動 `\http://<vCenter-IP>/mob` | VMware Managed ObjectsのURLからVM MORefを検索します。VMDK を接続解除する VM の * MORef * をメモします。 
+
+
+| 2 | `/4.1/vm/{moref}/backups` | `Get VM Backups` 指定したVMのバックアップのリストを取得します。手順 1 から * MORef * を渡します。リストアするバックアップの * backupid * をメモします。 
+
+
+| 3 | `/4.1/vm/{moref}/backups/
+{backupId}/vmdklocations` | `Get VMDK Locations` 指定したVMのVMDKのリストを取得します。手順 2 の * backupid * と手順 1 の * moref * を渡します。*vmdkLocationsList* 情報に注意してください。 
+
+
+| 4 | `/4.1/vm/{moref}/detachvmdks` | `Detach VMDKs` 指定したVMDKを切断します。手順 1 から * MORef * を渡します。手順 3 の VMDK * vmdkLocationsList * の詳細を * vmdksToDetach * 属性に渡します。 
+|===

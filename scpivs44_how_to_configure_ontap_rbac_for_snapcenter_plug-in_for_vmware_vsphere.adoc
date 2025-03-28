@@ -1,0 +1,36 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_how_to_configure_ontap_rbac_for_snapcenter_plug-in_for_vmware_vsphere.html 
+keywords:  
+summary: ONTAP RBACは、SnapCenterサーバのアプリケーション整合性（VMDK経由のアプリケーション整合性）ジョブにのみ適用されます。 
+---
+= SnapCenter Plug-in for VMware vSphere用にONTAP RBACを設定する方法
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+ONTAP RBACは、SnapCenterサーバのアプリケーション整合性（VMDK経由のアプリケーション整合性）ジョブにのみ適用されます。
+
+
+NOTE: SnapCenter Plug-in for VMware（SCV）5.0以降では、SCVへのカスタマイズされたロールベースアクセスを持つすべてのONTAPユーザに対して、HTTPおよびONTAPIタイプのアプリケーションをユーザのログイン方法として追加する必要があります。これらのアプリケーションにアクセスできないと、バックアップは失敗します。ONTAPユーザのログイン方法の変更を認識するには、SCVサービスを再起動する必要があります。ログイン・アカウントの作成または変更については'を参照して https://docs.netapp.com/us-en/ontap/authentication/config-worksheets-reference.html["カンリシヤニンシヨウトRBACセツテイヨウノワアクシイト"]ください
+
+Plug-in for VMware vSphereでONTAP RBACを使用する場合は、ストレージシステムにSnapCenter RBACを設定する必要があります。ONTAP で次のタスクを実行する必要があります。
+
+* ロールを1つ作成します。
++
+https://docs.netapp.com/us-en/ontap/concepts/administrator-authentication-rbac-concept.html["カンリシヤニンシヨウトRBAC"]
+
+* ONTAPで、ロールのユーザ名とパスワード（ストレージシステムクレデンシャル）を作成します。
++
+このストレージシステムのクレデンシャルは、SnapCenter Plug-in for VMware vSphere用のストレージシステムを設定するために必要です。これを行うには、プラグインでクレデンシャルを入力します。 これらのクレデンシャルを使用してストレージシステムにログインすると、クレデンシャルの作成時にONTAPで設定したSnapCenter機能が表示されます。
+
+
+
+管理者ログインまたは root ログインを使用すればすべての SnapCenter タスクにアクセスすることができますが、 ONTAP の RBAC 機能を使用して、権限を制限したカスタムアカウントをいくつか作成することを推奨します。
+
+詳細については、を参照してください link:scpivs44_minimum_ontap_privileges_required.html["最小ONTAP Privilegesが必要"^]。

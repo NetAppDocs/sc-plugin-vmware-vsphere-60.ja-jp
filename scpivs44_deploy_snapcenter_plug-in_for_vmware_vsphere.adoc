@@ -1,0 +1,157 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_deploy_snapcenter_plug-in_for_vmware_vsphere.html 
+keywords:  
+summary: SnapCenterの機能を使用して仮想マシン上のVM、データストア、アプリケーションと整合性のあるデータベースを保護するには、SnapCenter Plug-in for VMware vSphereを導入する必要があります。 
+---
+= SnapCenter Plug-in for VMware vSphereの導入
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+SnapCenterの機能を使用して仮想マシン上のVM、データストア、アプリケーションと整合性のあるデータベースを保護するには、SnapCenter Plug-in for VMware vSphereを導入する必要があります。
+
+.開始する前に
+このセクションでは、導入を開始する前に実行する必要があるすべてのアクションを示します。
+
+
+NOTE: OVA環境は、VMware vCenter 7u1以上でサポートされます。
+
+* 導入要件を確認しておく必要があります。
+* サポートされているバージョンのvCenter Serverが実行されている必要があります。
+* vCenter Server環境の設定とセットアップが完了している必要があります。
+* SnapCenter Plug-in for VMware vSphere VM用のESXiホストのセットアップが完了している必要があります。
+* SnapCenter Plug-in for VMware vsphere.tarファイルをダウンロードしておく必要があります。
+* vCenter Serverインスタンスのログイン認証の詳細を確認しておく必要があります。
+* 有効な公開鍵ファイルと秘密鍵ファイルを持つ証明書が必要です。詳細については、セクションの記事を参照して https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapCenter/SnapCenter_Certificate_Resolution_Guide["ストレージ証明書の管理"] ください。
+* vSphere Clientのすべてのブラウザセッションからログアウトして閉じておく必要があります。また、SnapCenter Plug-in for VMware vSphereの導入時にブラウザキャッシュの問題が発生しないように、ブラウザキャッシュを削除しておく必要があります。
+* vCenterでTransport Layer Security（TLS）を有効にしておく必要があります。VMwareのドキュメントを参照してください。
+* SnapCenter Plug-in for VMware vSphereが導入されているvCenter以外のvCenterでバックアップを実行する場合は、ESXiサーバ、SnapCenter Plug-in for VMware vSphere、および各vCenterを同時に同期する必要があります。
+* VVOLデータストアのVMを保護するには、まずONTAP tools for VMware vSphereを導入する必要があります。サポートされているONTAP toolsのバージョンの最新情報については、を参照してください https://imt.netapp.com/matrix/imt.jsp?components=121034;&solution=1517&isHWU&src=IMT["NetApp Interoperability Matrix Tool"^]。ONTAP toolsは、ONTAPおよびVMware Web Client上でストレージをプロビジョニングおよび設定します。
+
+
+vCenterと同じタイムゾーンでSnapCenter Plug-in for VMware vSphereを導入します。バックアップスケジュールは、SnapCenter Plug-in for VMware vSphereが導入されているタイムゾーンで実行されます。vCenterでは、データはvCenterが配置されているタイムゾーンでレポートされます。そのため、SnapCenter Plug-in for VMware vSphereとvCenterが異なるタイムゾーンにある場合は、SnapCenter Plug-in for VMware vSphereダッシュボードのデータがレポートのデータと同じでない可能性があります。
+
+.手順
+. VMware vCenter 7.0.3以降のバージョンの場合は、の手順に従って、 link:scpivs44_download_the_ova_open_virtual_appliance.html["Open Virtual Appliance（OVA；オープン仮想アプライアンス）のダウンロード"^] 証明書をvCenterにインポートします。
+. ブラウザで、VMware vSphere vCenterに移動します。
++
+
+NOTE: IPv6 HTML Webクライアントの場合は、ChromeまたはFirefoxを使用する必要があります。
+
+. VMware vCenter Single Sign-On * ページにログインします。
+. ナビゲータペインで、仮想マシンの有効な親オブジェクトであるインベントリオブジェクト（データセンター、クラスタ、ホストなど）を右クリックし、*[Deploy OVF Template]*を選択してVMware導入ウィザードを開始します。
+. .ovaファイルを含む.tarファイルをローカルシステムに展開します。[Select an OVF template*]ページで、.tar抽出フォルダ内のファイルの場所を指定します `.ova` 。
+. 「 * 次へ * 」をクリックします。
+. [ 名前とフォルダの選択 * ] ページで、 VM または vApp の一意の名前を入力し、導入場所を選択して、 [ 次へ * ] をクリックします。
++
+この手順では、ファイルをvCenterにインポートする場所を指定し `.tar` ます。VMのデフォルト名は、選択したファイルの名前と同じ `.ova` です。デフォルトの名前を変更した場合は、各vCenter Server VMフォルダ内で一意の名前を選択します。
+
++
+VMのデフォルトの導入場所は、ウィザードを開始したインベントリオブジェクトです。
+
+. [ リソースの選択 *] ページで、導入した VM テンプレートを実行するリソースを選択し、 [ 次へ *] をクリックします。
+. [詳細の確認]ページで、テンプレートの詳細を確認し `.tar` 、*[次へ]*をクリックします。
+. [ ライセンス契約 * ] ページで、 [ すべてのライセンス契約に同意します ] のチェックボックスをオンにします。 *
+. ［ * ストレージの選択 * ］ ページで、導入した OVF テンプレートのファイルの保存場所と保存方法を定義します。
++
+.. VMDKのディスクフォーマットを選択します。
+.. VMストレージポリシーを選択します。
++
+このオプションは、デスティネーションリソースでストレージポリシーが有効になっている場合にのみ使用できます。
+
+.. 導入したOVAテンプレートを格納するデータストアを選択します。
++
+構成ファイルと仮想ディスクファイルはデータストアに格納されます。
+
++
+仮想マシンまたはvApp、および関連するすべての仮想ディスクファイルを格納できるサイズのデータストアを選択します。
+
+
+
+. [ ネットワークの選択 *] ページで、次の操作を行います。
++
+.. 送信元ネットワークを選択し、宛先ネットワークにマッピングします。
++
+[Source Network]列には、OVAテンプレートで定義されているすべてのネットワークが表示されます。
+
+.. [IP Allocation Settings]*セクションで、必要なIPアドレスプロトコルを選択し、*[Next]*をクリックします。
++
+SnapCenter Plug-in for VMware vSphereは、1つのネットワークインターフェイスをサポートします。複数のネットワークアダプタが必要な場合は、手動で設定する必要があります。を参照してください https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapCenter/How_to_create_additional_network_adapters_in_NDB_and_SCV_4.3["技術情報アーティクル：「 How to create additional network adapters"^]。
+
+
+
+. [ テンプレートのカスタマイズ ] ページで、次の操作を行います。
++
+.. [* Register to Existing vCenter* （既存の vCenter に登録） ] セクションで、仮想アプライアンスの vCenter 名と vCenter クレデンシャルを入力します。
++
+[vCenter username（vCenterユーザー名）]フィールドに、の形式でユーザー名を入力し `domain\username`ます。
+
+.. Create SCV credentials * セクションにローカルクレデンシャルを入力します。
++
+[*Username*] フィールドに、ローカルユーザ名を入力します。ドメインの詳細は入力しないでください。
+
++
+
+IMPORTANT: 指定したユーザ名とパスワードをメモしておきます。あとでSnapCenter Plug-in for VMware vSphereの設定を変更する場合は、これらのクレデンシャルを使用する必要があります。
+
+.. maintユーザのクレデンシャルを入力します。
+.. [ネットワークプロパティのセットアップ]セクションで、ホスト名を入力します。
++
+... [IPv4ネットワークプロパティの設定]セクションで、IPv4アドレス、IPv4ネットマスク、IPv4ゲートウェイ、IPv4プライマリDNS、IPv4セカンダリDNSなどのネットワーク情報を入力します。 およびIPv4検索ドメイン。
+... [IPv6ネットワークプロパティの設定]セクションで、IPv6アドレス、IPv6ネットマスク、IPv6ゲートウェイ、IPv6プライマリDNS、IPv6セカンダリDNSなどのネットワーク情報を入力します。 およびIPv6検索ドメイン。
++
+必要に応じて、[IPv4]フィールド、[IPv6]フィールド、またはその両方を選択します。IPv4とIPv6の両方を使用している場合は、そのうちの1つにのみプライマリDNSを指定する必要があります。
+
++
+
+IMPORTANT: ネットワーク設定として DHCP を使用する場合は、これらの手順を省略し、 [*Setup Network Properties*] セクションのエントリを空白のままにしておくことができます。
+
+
+
+.. * Setup Date and Time * で、 vCenter が配置されているタイムゾーンを選択します。
+
+
+. [ 完了準備完了 ] ページでページを確認し、 [ 完了 ] をクリックします。
++
+すべてのホストにIPアドレスを設定する必要があります（FQDNホスト名はサポートされません）。導入処理では、導入前に入力した内容は検証されません。
+
++
+OVFのインポートタスクと導入タスクが完了するまでの間、[Recent Tasks]ウィンドウで導入の進捗状況を確認できます。
+
++
+SnapCenter Plug-in for VMware vSphereの導入が完了すると、Linux VMとして導入されてvCenterに登録され、VMware vSphere Clientがインストールされます。
+
+. SnapCenter Plug-in for VMware vSphereを導入したVMに移動し、*[概要]*タブをクリックし、*[電源オン]*ボックスをクリックして仮想アプライアンスを起動します。
+. SnapCenter Plug-in for VMware vSphereの電源投入時に、導入したSnapCenter Plug-in for VMware vSphereを右クリックし、*[ゲストOS ]*を選択して*[VMwareツールのインストール]*をクリックします。
++
+VMware Toolsは、SnapCenter Plug-in for VMware vSphereが導入されているVMにインストールされます。VMware Toolsのインストールの詳細については、VMwareのドキュメントを参照してください。
+
++
+導入が完了するまでに数分かかることがあります。SnapCenter Plug-in for VMware vSphereの電源がオンになると導入が成功したことが通知され、VMware Toolsがインストールされ、SnapCenter Plug-in for VMware vSphereへのログインを求める画面が表示されます。初回リブート時に、ネットワーク設定をDHCPからSTATICに切り替えることができます。スタティックからDHCPへのただし、スイッチングはサポートされていません。
+
++
+画面に、SnapCenter Plug-in for VMware vSphereの導入先のIPアドレスが表示されます。IPアドレスをメモします。SnapCenter Plug-in for VMware vSphereの設定を変更する場合は、SnapCenter Plug-in for VMware vSphere管理GUIにログインする必要があります。
+
+. 導入画面に表示されたIPアドレスと導入ウィザードで指定したクレデンシャルを使用してSnapCenter Plug-in for VMware vSphere管理GUIにログインし、SnapCenter Plug-in for VMware vSphereがvCenterに正常に接続されて有効になっていることをダッシュボードで確認します。
++
+管理GUIにアクセスするには、の形式を使用し `\https://<appliance-IP-address>:8080` ます。
+
++
+導入時に設定したadminユーザ名とパスワード、およびメンテナンスコンソールを使用して生成されたMFAトークンを使用してログインします。
+
++
+SnapCenter Plug-in for VMware vSphereが有効になっていない場合は、を参照してください link:scpivs44_restart_the_vmware_vsphere_web_client_service.html["VMware vSphere Client Serviceを再起動します。"]。
+
++
+ホスト名が「UnifiedVSC/SCV」の場合は、アプライアンスを再起動します。アプライアンスを再起動してもホスト名が指定したホスト名に変更されない場合は、アプライアンスを再インストールする必要があります。
+
+
+
+.終了後
+必要なを完了する必要があります link:scpivs44_post_deployment_required_operations_and_issues.html["導入後の処理"]。

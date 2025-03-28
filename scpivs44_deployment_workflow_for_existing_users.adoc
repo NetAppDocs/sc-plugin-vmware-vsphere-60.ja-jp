@@ -1,0 +1,19 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_deployment_workflow_for_existing_users.html 
+keywords:  
+summary: このワークフローは、 SnapCenter を使用していて、 SnapCenter バックアップを作成している場合に使用できます。 
+---
+= 既存ユーザ向けの導入ワークフロー
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+SnapCenterユーザでSnapCenterバックアップを作成している場合は、次のワークフローを使用して作業を開始してください。
+
+image:scpivs44_image3.png["導入のワークフロー"]

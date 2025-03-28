@@ -1,0 +1,49 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_rest_api_workflow__restore_vms.html 
+keywords:  
+summary: SnapCenter Plug-in for VMware vSphere REST APIを使用してVMバックアップのリストア処理を実行するには、所定の順序でREST API呼び出しを実行する必要があります。 
+---
+= VMをリストアするためのREST APIのワークフロー
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+SnapCenter Plug-in for VMware vSphere REST APIを使用してVMバックアップのリストア処理を実行するには、所定の順序でREST API呼び出しを実行する必要があります。
+
+各REST APIについて、REST APIの先頭にを追加し `\https://<server>:<port>` て完全なエンドポイントを形成します。
+
+|===
+| ステップ | REST API | コメント 
+
+
+| 1 | に移動 `\http://<vCenter-IP>/mob` | VMware Managed ObjectsのURLからVM MORefを検索します。リストアする VM の * MORef * をメモします。 
+
+
+| 2 | `/4.1/vm/{moref}/backups` | `Get VM Backups` 指定したVMのバックアップのリストを取得します。手順 1 から * MORef * を渡します。リストアするバックアップの * backupid * をメモします。 
+
+
+| 3 | `/4.1/vm/backups/{backupId}/
+snapshotlocations` | `Get snapshot locations` 指定したバックアップのSnapshotの場所を取得します。手順 2 から * backupid * を渡します。この *snapshotsList* 情報に注意してください。 
+
+
+| 4 | `/4.1/vm/{moref}/backups/
+availableesxhosts` | `Get available ESX Hosts` バックアップが格納されているホストの情報を取得します。入手可能な EsxHostsList* 情報に注意してください。 
+
+
+| 5 | `/4.1/vm/{moref}/backups/
+{backupId}/restore`  a| 
+`Restore a VM from a backup` 指定したバックアップをリストアします。ステップ 3 と 4 の情報を *restoreLocations* 属性に渡します
+
+
+NOTE: VMバックアップがパーシャルバックアップの場合は、パラメータを「false」に設定します `restartVM` 。
+
+
+NOTE: テンプレートであるVMはリストアできません。
+
+|===

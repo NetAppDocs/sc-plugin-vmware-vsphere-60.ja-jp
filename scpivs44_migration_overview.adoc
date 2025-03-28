@@ -1,0 +1,68 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_migration_overview.html 
+keywords:  
+summary:  
+---
+= 移行の概要
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+migrationコマンドは、# SnapCenter 4.0以降の#からのみメタデータを移行します。以前のバージョンのSnapCenterを使用している場合は、移行前にアップグレードする必要があります。
+
+* 移行対象に含まれるもの
++
+** 移行される内容
++
+SnapCenterメタデータ。ストレージシステム、カスタマイズしたスロットル、SnapCenter構成ファイルのEメール設定、ポリシー、リソースグループ、バックアップメタデータ、マウントが含まれます。（プリスクリプトまたはポストスクリプトが検出されると移行が失敗する）
+
+** 移行されないもの
++
+リソースグループ用に設定されたプリスクリプトとポストスクリプト
+
++
+アクティブなゲストファイルのリストアセッション、ゲストファイルのリストアクレデンシャル、プロキシVM
+
++
+ゲストファイルリストアセッションがアクティブなときに移行を開始すると、セッションは削除され、接続されたディスクはアンマウントされません。接続されているディスクを手動で削除しなければならない場合があります。
+
++
+`scbr.override` 構成ファイル
+
+
+
+* SnapCenterホストが中断されている
++
+移行を確実に成功させるために、migrationコマンドはSnapCenterに登録されているすべてのホストを一時停止します。移行プロセスが正常に終了すると、SnapCenterホストが再開されます。
+
+* 移行用コマンドレットのプロセス
++
+SnapCenterに登録されているSnapCenter Plug-in for VMware vSphereのインスタンスごとに、Windows PowerShellコマンドレットを使用する必要があります `invoke-SCVOVAMigration` 。
+
++
+このコマンドレットは次の処理を実行します。
+
++
+** 移行中にジョブが失敗しないように、すべてのスケジュールを一時停止します。移行が正常に完了すると、スケジュールは自動的に再度有効になります。
+** ストレージ接続とメタデータを移行します。
+** 移行後のバックアップのバックアップスケジュールを作成します。
+** Windowsホストから既存のSnapCenter Plug-in for VMware vSphereをアンインストールします。
++
+SnapCenter Plug-in for VMware vSphereがSnapCenter Serverホストにインストールされていて、SnapCenterリポジトリ用に保護が設定されている場合は、SnapCenter Plug-in for VMware vSphereとSnapCenter Plug-in for Windowsを含むWindowsベースのプラグインパッケージも移行プロセスによってアンインストールされ、リポジトリの保護をサポートするためにSnapCenter Plug-in for Windowsの最新バージョンが再インストールされます。SnapCenter GUIのホストタイプが「vsphere」から「windows」に変わります。
+
+** Windows SnapCenterサーバからvSphereホストとリソースグループを削除します。
+** LinuxベースのSnapCenter Plug-in for VMware vSphereでバックアップジョブをアクティブ化します。
+** SnapCenter Plug-in for VMware vSphereのvSphereホストをSnapCenterに登録して、仮想化されたデータベースとファイルシステムのアプリケーションベースのバックアップ（VMDKバックアップ経由のアプリケーション）をサポートします。
+
+
+* メタデータの格納先
++
+アプリケーションベースのVMDKバックアップのメタデータは、SnapCenterサーバリポジトリに格納されます。VMとデータストアのバックアップのメタデータは、SnapCenter Plug-in for VMware vSphere MySQLリポジトリに格納されます。
+
+

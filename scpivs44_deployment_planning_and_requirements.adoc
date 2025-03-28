@@ -1,0 +1,221 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_deployment_planning_and_requirements.html 
+keywords:  
+summary: 仮想アプライアンスを導入する前に、導入要件を確認しておく必要があります。 
+---
+= 導入の計画と要件
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+仮想アプライアンスを導入する前に、導入要件を確認しておく必要があります。導入要件を次の表に示します。
+
+
+
+== ホストの要件
+
+SnapCenter Plug-in for VMware vSphere（SCV）の導入を開始する前に、ホストの要件を確認しておく必要があります。
+
+* SnapCenter Plug-in for VMware vSphereは、プラグインを使用してWindowsシステムとLinuxシステムのどちらのデータを保護するかに関係なく、Linux VMとして導入されます。
+* SnapCenter Plug-in for VMware vSphereをvCenter Serverに導入する必要があります。
++
+バックアップスケジュールは、SnapCenter Plug-in for VMware vSphereが導入されているタイムゾーンで実行されます。vCenterでは、データはvCenterが配置されているタイムゾーンでレポートされます。そのため、SnapCenter Plug-in for VMware vSphereとvCenterが異なるタイムゾーンにある場合は、SnapCenter Plug-in for VMware vSphereダッシュボードのデータがレポートのデータと同じでない可能性があります。
+
+* 名前と特殊文字が含まれるフォルダにSnapCenter Plug-in for VMware vSphereを導入しないでください。
++
+フォルダ名には、 $ ！ @ # % ^ & （） _ + ｛ ｝ ' ；、 * ？ " <> | という特殊文字は使用できません
+
+* vCenter Serverごとに、一意のSnapCenter Plug-in for VMware vSphereインスタンスを個別に導入して登録する必要があります。
++
+** 各vCenter Serverは、リンクモードかどうかに関係なく、SnapCenter Plug-in for VMware vSphereの個別のインスタンスとペアリングする必要があります。
+** SnapCenter Plug-in for VMware vSphereの各インスタンスを個別のLinux VMとして導入する必要があります。
++
+たとえば、6つの異なるvCenter Serverインスタンスからバックアップを実行する場合は、6つのホストにSnapCenter Plug-in for VMware vSphereを導入し、各vCenter ServerをSnapCenter Plug-in for VMware vSphereの固有のインスタンスとペアリングする必要があります。
+
+
+
+* VVOL VM（VMware VVOLデータストア上のVM）を保護するには、最初にONTAP tools for VMware vSphereを導入する必要があります。ONTAP toolsは、ONTAPおよびVMware WebクライアントでVVOL用のストレージをプロビジョニングおよび設定します。
++
+詳細については、ONTAP Tools for VMware vSphereのドキュメントを参照してください。また、ONTAP toolsでサポートされるバージョンの最新情報については、を参照してください https://imt.netapp.com/matrix/imt.jsp?components=121034;&solution=1517&isHWU&src=IMT["NetApp Interoperability Matrix Tool"^]。
+
+* SnapCenter Plug-in for VMware vSphereでは、Storage vMotionをサポートする仮想マシンの制限により、共有PCIデバイスまたはPCIeデバイス（NVIDIAグリッドGPUなど）のサポートが制限されます。詳細については、ベンダーのドキュメント『VMware導入ガイド』を参照してください。
++
+** サポート内容：
++
+リソースグループの作成
+
++
+VMの整合性を伴わないバックアップの作成
+
++
+すべてのVMDKがNFSデータストアにあり、プラグインでStorage vMotionを使用する必要がない場合の、VM全体のリストア
+
++
+VMDKの接続と接続解除
+
++
+データストアのマウントとアンマウント
+
++
+ゲストファイルのリストア
+
+** サポートされていないもの：
++
+VM整合性を維持したバックアップの作成
+
++
+VMFSデータストア上に1つ以上のVMDKがある場合のVM全体のリストア
+
+
+
+* SnapCenter Plug-in for VMware vSphereの制限事項の詳細については、を参照してください link:scpivs44_release_notes.html["SnapCenter Plug-in for VMware vSphere リリースノート"^]。
+
+
+
+
+== ライセンス要件
+
+|===
+| 次のライセンスを提供する必要があります。 | ライセンス要件 
+
+
+| ONTAP | いずれか：SnapMirrorまたはSnapVault（関係のタイプに関係なくセカンダリデータ保護用） 
+
+
+| その他の製品 | vSphere Standard、Enterprise、またはEnterprise Plusリストア処理（Storage vMotionを使用）を実行するには、vSphereライセンスが必要です。 vSphere EssentialsまたはEssentials Plusライセンスには、Storage vMotionは含まれていません。 
+
+
+| プライマリデスティネーション | SnapCenter Standard ： VMware SnapRestore を介したアプリケーションベースの保護を実行する場合に必要： VMware の VM およびデータストアのみ FlexClone のリストア処理を実行する場合に必要： VMware の VM およびデータストアのみのマウント処理と接続処理に使用 
+
+
+| セカンダリデスティネーション | SnapCenter Standard ： VMware FlexClone を介したアプリケーションベースの保護のフェイルオーバー処理に使用： VMware の VM およびデータストアのみでのマウント処理と接続処理に使用されます 
+|===
+
+
+== ソフトウェアのサポート
+
+|===
+| 項目 | サポートされるバージョン 
+
+
+| vCenter vSphere | 7.0U1以上 
+
+
+| ESXiサーバ | 7.0U1以上 
+
+
+| IPアドレス | IPv4、IPv6 
+
+
+| VMware TLS | 1.2、1.3 
+
+
+| SnapCenter ServerでのTLS | 1.2と1.3 SnapCenterサーバは、VMDKのデータ保護処理を介してアプリケーション用のSnapCenter Plug-in for VMware vSphereと通信するためにこのプロトコルを使用します。 
+
+
+| VMwareアプリケーションvStorage API for Array Integration（VAAI） | SnapCenter Plug-in for VMware vSphereは、この設定を使用してリストア処理のパフォーマンスを向上させます。また、NFS環境でのパフォーマンスも向上します。 
+
+
+| VMware向けONTAPツール | SnapCenter Plug-in for VMware vSphereは、このを使用してVVolデータストア（VMwareの仮想ボリューム）を管理します。サポートされているバージョンについては、を参照してください https://imt.netapp.com/matrix/imt.jsp?components=121034;&solution=1517&isHWU&src=IMT["NetApp Interoperability Matrix Tool"^]。 
+|===
+サポートされているバージョンの最新情報については、を参照してください https://imt.netapp.com/matrix/imt.jsp?components=121034;&solution=1517&isHWU&src=IMT["NetApp Interoperability Matrix Tool"^]。
+
+
+
+==== NVMeoverTCPオヨヒNVMeoverFCフロトコルノヨウケン
+
+NVMe over TCPおよびNVMe over FCプロトコルをサポートするための最小ソフトウェア要件は次のとおりです。
+
+* vCenter vSphere 7.0U3
+* ESXi 7.0U3
+* ONTAP 9.10.1
+
+
+
+
+== スペースとサイジングの要件
+
+|===
+| 項目 | 要件 
+
+
+| オペレーティングシステム | Linux 
+
+
+| 最小CPU数 | 4コア 
+
+
+| 最小RAM | 最小構成：12GB推奨：16GB 
+
+
+| SnapCenter Plug-in for VMware vSphere、ログ、MySQLデータベース用の最小ハードドライブスペース | 100 GB 
+|===
+
+
+== 接続とポートの要件
+
+|===
+| ポートのタイプ | 事前設定されたポート 
+
+
+| VMware ESXi Serverのポート | 443（HTTPS）、双方向のゲストファイルリストア機能では、このポートが使用されます。 
+
+
+| SnapCenter Plug-in for VMware vSphereのポート  a| 
+8144（HTTPS）。双方向のポートは、VMware vSphereクライアントとSnapCenter サーバからの通信に使用されます。8080 bidirectionalこのポートは、仮想アプライアンスの管理に使用されます。
+
+注：SnapCenterにSCVホストを追加するためのカスタムポートがサポートされています。
+
+
+
+| VMware vSphere vCenter Serverのポート | VVol VMを保護する場合は、ポート443を使用する必要があります。 
+
+
+| ストレージクラスタまたはStorage VMポート | 443 （ HTTPS ）、双方向 80 （ HTTP ）、仮想アプライアンスと Storage VM または Storage VM を含むクラスタ間の通信に使用されるポート。 
+|===
+
+
+== サポートされる構成
+
+各プラグイン インスタンスでサポートされるvCenter Serverは1つだけです。リンク モードのvCenterがサポートされます。次の図に示すように、複数のプラグインインスタンスで同じSnapCenterサーバをサポートできます。
+
+image:scpivs44_image4.png["サポートされている構成グラフィック表現"]
+
+
+
+== RBACケンケンノヒツヨウ
+
+vCenter管理者アカウントには、次の表に示す必要なvCenter権限が必要です。
+
+|===
+| この操作を実行するには ... | 次の vCenter 権限が必要です ... 
+
+
+| vCenterでSnapCenter Plug-in for VMware vSphereを導入して登録する | 拡張子：拡張子を登録します 
+
+
+| SnapCenter Plug-in for VMware vSphereをアップグレードまたは削除する  a| 
+エクステンション
+
+* 拡張機能の更新
+* 拡張機能の登録解除
+
+
+
+
+| SnapCenterに登録されたvCenterクレデンシャルユーザアカウントに、SnapCenter Plug-in for VMware vSphereへのユーザアクセスの検証を許可する | sessions.validate.session 
+
+
+| ユーザにSnapCenter Plug-in for VMware vSphereへのアクセスを許可する | SCV Administrator Backup SCV Guest File Restore SCV Restore SCV View 権限が vCenter ルートで割り当てられている必要があります。 
+|===
+
+
+== AutoSupport
+
+SnapCenter Plug-in for VMware vSphereは、プラグインのURLなど、使用状況を追跡するための最小限の情報を提供します。AutoSupportには、AutoSupportビューアに表示されるインストール済みプラグインの表が含まれています。

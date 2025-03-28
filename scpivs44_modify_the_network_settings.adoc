@@ -1,0 +1,49 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_modify_the_network_settings.html 
+keywords:  
+summary: SnapCenter Plug-in for VMware vSphereで設定されているネットワーク設定を変更することができます。プラグインはこれらの設定を使用してvCenterにアクセスします。 
+---
+= ネットワーク設定の変更
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+SnapCenter Plug-in for VMware vSphereで設定されているネットワーク設定を変更することができます。プラグインはこれらの設定を使用してvCenterにアクセスします。
+
+.開始する前に
+SnapCenter Plug-in for VMware vSphere管理GUIのIPアドレスとログオンクレデンシャルを確認しておく必要があります。また、メンテナンスコンソールから生成されたMFAトークンもメモしておく必要があります。
+
+* このIPアドレスは、SnapCenter Plug-in for VMware vSphereの導入時に表示されていました。
+* SnapCenter Plug-in for VMware vSphereの導入時に指定したログインクレデンシャル、またはあとで変更したログインクレデンシャルを使用します。
+* メンテナンスコンソールの[System Configuration]オプションを使用して、6桁のMFAトークンを生成します。
+
+
+.手順
+. SnapCenter Plug-in for VMware vSphere管理GUIにログインします。
++
+次の形式を使用： `\https://<appliance-IP-address>:8080`
+
+. 上部ツールバーの[設定]アイコンをクリックします。
++
+image:scpivs44_image31.png["SnapCenter Plug-in for VMware vSphere管理GUI"]
+
+. [ * 設定 * ] ページの [ * ネットワーク設定 * ] セクションで、 [* IPv4 * または * IPv6 * ] をクリックし、 [ * 編集 ] をクリックします。
++
+新しい情報を入力し、 * 保存 * をクリックします。
+
+. ネットワーク設定を削除する場合は、次の手順を実行します。
++
+** IPv4：[IPアドレス]*フィールドにと入力し、*[保存]*を `0.0.0.0` クリックします。
+** IPv6：[IP Address]フィールドにと入力し、*[Save]*をクリックします。 `: :0`
+
+
+
+
+
+NOTE: IPv4とIPv6の両方を使用している場合、両方のネットワーク設定を削除することはできません。残りのネットワークでは、[DNS Servers]フィールドと[Search Domains]フィールドを指定する必要があります。

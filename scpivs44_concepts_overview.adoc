@@ -1,0 +1,78 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_concepts_overview.html 
+keywords:  
+summary: SnapCenter Plug-in for VMware vSphereは、VMとデータストアにデータ保護サービスを提供するスタンドアロンの仮想アプライアンス（オープン仮想アプライアンス形式）であり、SnapCenterアプリケーションベースのプラグインに対してデータ保護サービスをサポートします。このドキュメントでは、SnapCenter Plug-in for VMware vSphereの導入方法と使用方法について説明します。クイックスタート情報も記載されています。 
+---
+= 製品概要
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:firstname: [.lead]
+:author: [.lead]
+:authorinitials: [
+:authors: [.lead]
+:revnumber: 
+:revdate: and supports data protection services for SnapCenter application-based plug-ins. This document describes how to deploy and use SnapCenter Plug-in for VMware vSphere and includes quick start information.
+
+
+SnapCenter Plug-in for VMware vSphereは、Linuxベースの仮想アプライアンスとして導入されます。
+
+SnapCenter Plug-in for VMware vSphereは、環境に次の機能を追加します。
+
+* VM整合性およびクラッシュ整合性のあるデータ保護処理がサポートされます。
++
+vCenterでVMware vSphere Client GUIを使用して、VMware仮想マシン（従来のVMとVVOL VM）、VMDK、およびデータストアのすべてのバックアップとリストアの処理を実行できます。VVol VM（VVolデータストア内のVM）の場合は、crash-consistentバックアップのみがサポートされます。また、VMとVMDKをリストアしたり、ゲストOS上に存在するファイルとフォルダをリストアしたりすることもできます。
+
++
+VM、VMDK、およびデータストアをバックアップする場合、プラグインではRDMはサポートされません。VMのバックアップジョブではRDMが無視されます。RDMをバックアップする必要がある場合は、SnapCenterアプリケーションベースのプラグインを使用する必要があります。
+
++
+SnapCenter Plug-in for VMware vSphereには、SnapCenter Plug-in for VMware vSphereのメタデータを含むMySQLデータベースが含まれています。VM整合性およびクラッシュ整合性のあるデータ保護を実現するには、SnapCenterサーバをインストールする必要はありません。
+
+* アプリケーションと整合性のある（VMDK / RDM経由の）データ保護処理がサポートされます。
++
+SnapCenter GUIと適切なSnapCenterアプリケーションプラグインを使用して、VM上のプライマリストレージとセカンダリストレージ上のデータベースとファイルシステムのすべてのバックアップ処理とリストア処理を実行できます。
+
++
+SnapCenterは、SnapCenter Plug-in for VMware vSphereを標準で活用して、VMDK、rawデバイスマッピング（RDM）、NFSデータストア上のすべてのデータ保護処理を実行します。仮想アプライアンスの導入後は、vCenterとのやり取りがすべてプラグインで処理されます。SnapCenter Plug-in for VMware vSphereは、SnapCenterのアプリケーションベースのプラグインをすべてサポートしています。
+
++
+SnapCenterでは、データベースとVMのシングルSnapshotを同時に作成することはできません。VMとデータベースのバックアップは、スケジュールを設定して個別に実行する必要があります。これにより、データベースとVMが同じボリュームでホストされている場合でも、個別のSnapshotが作成されます。SnapCenter GUIを使用してデータベースアプリケーションのバックアップのスケジュールを設定し、VMware vSphere Client GUIを使用してVMとデータストアのバックアップのスケジュールを設定します。
+
+* VMと整合性のあるSnapshotにはVMwareツールが必要
++
+VMware toolsがインストールされて実行されていない場合、ファイルシステムは休止されず、crash-consistent Snapshotが作成されます。
+
+* SAN （ VMFS ）環境でのリストア処理には、 VMware Storage vMotion が必要です
++
+VMwareファイルシステム（VMFS）のリストアワークフローでは、VMware Storage vMotion機能を使用します。Storage vMotionはvSphere Standardライセンスに含まれていますが、vSphere EssentialsまたはEssentials Plusライセンスでは使用できません。
+
++
+NFS環境のほとんどのリストア処理では、ONTAPの標準機能（Single File SnapRestoreなど）が使用され、VMware Storage vMotionは必要ありません。
+
+* VMware VVOL VMを設定するには、ONTAP Tools for VMware vSphereが必要です。
++
+ONTAPツールを使用して、ONTAPおよびVMware Web ClientでVVOL用のストレージをプロビジョニングおよび設定します。
+
++
+詳細については、ONTAP Tools for VMware vSphereのドキュメントを参照してください。また、ONTAP toolsでサポートされるバージョンの最新情報については、を参照してください https://imt.netapp.com/matrix/imt.jsp?components=121034;&solution=1517&isHWU&src=IMT["NetApp Interoperability Matrix Tool"^]。
+
+* SnapCenter Plug-in for VMware vSphereをLinux VMの仮想アプライアンスとして導入
++
+仮想アプライアンスはLinux VMとしてインストールする必要がありますが、SnapCenter Plug-in for VMware vSphereではWindowsベースとLinuxベースの両方のvCenterがサポートされます。SnapCenterは、このプラグインを標準で使用します。ユーザの介入は必要ありません。vCenterと通信し、WindowsおよびLinuxの仮想アプリケーションに対してデータ保護処理を実行するSnapCenterアプリケーションベースのプラグインをサポートします。
+
+
+
+SnapCenter Plug-in for VMware vSphereは、これらの主要な機能に加えて、iSCSI、ファイバチャネル、FCoE、NFS 3.0/4.1、VMFS 5.0/6.0、NVMe over FC、NVMe over TCPもサポートしています。
+
+サポートされるバージョンの最新情報については、（IMT）を参照して https://imt.netapp.com/matrix/imt.jsp?components=121034;&solution=1517&isHWU&src=IMT["NetApp Interoperability Matrix Tool"^] ください。
+
+NFSプロトコルとESXiホストについては、VMwareが提供するvSphere Storageのドキュメントを参照してください。
+
+SnapCenterのデータ保護の詳細については、のSnapCenterプラグインのデータ保護に関する情報を参照して http://docs.netapp.com/us-en/snapcenter/index.html["SnapCenter のドキュメント"^]ください。
+
+サポートされるアップグレードパスと移行パスについては、を参照してください link:scpivs44_release_notes.html["SnapCenter Plug-in for VMware vSphere リリースノート"^]。

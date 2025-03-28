@@ -1,0 +1,265 @@
+---
+settings:
+  name: SnapCenter Plug-in for VMware vSphere
+  downlevel: true
+  internal:
+    pdf_enabled: true
+  prod:
+    pdf_enabled: true
+    harmony_enabled: false
+  versions:
+  - version-number: '6.0'
+    url: "/sc-plugin-vmware-vsphere-60"
+  - version-number: '6.1'
+    url: "/sc-plugin-vmware-vsphere"
+  - version-number: '5.0'
+    url: "/sc-plugin-vmware-vsphere-50"
+  - version-number: '4.9'
+    url: "/sc-plugin-vmware-vsphere-49"
+  - version-number: '4.8'
+    url: "/sc-plugin-vmware-vsphere-48"
+  - version-number: '4.7'
+    url: "/sc-plugin-vmware-vsphere-47"
+  - version-number: '4.6'
+    url: "/sc-plugin-vmware-vsphere-46"
+  - version-number: '4.5'
+    url: "/sc-plugin-vmware-vsphere-45"
+  langs: ja-jp,us-en,de-de,es-es,fr-fr,it-it,pt-br,ko-kr,zh-cn,zh-tw
+sidebar:
+  entries:
+  - title: SnapCenter Plug-in for VMware vSphere 6.0のドキュメント
+    url: "/index.html"
+  - title: リリースノート
+    entries:
+    - title: SnapCenter Plug-in for VMware vSphereリリースノート
+      url: "/scpivs44_release_notes.html"
+    - title: SnapCenter Plug-in for VMware vSphere 6.0.1の新機能
+      url: "/scv60_releasenotes_601_whats_new.html"
+    - title: SnapCenter Plug-in for VMware vSphere 6.0の新機能
+      url: "/scv60_releasenotes_60_whats_new.html"
+    - title: アップグレードパス
+      url: "/scv60_rn_upgrade_paths.html"
+  - title: 概念
+    entries:
+    - title: 製品概要
+      url: "/scpivs44_concepts_overview.html"
+    - title: 各種SnapCenter GUIの概要
+      url: "/scpivs44_overview_of_different_snapcenter_guis.html"
+    - title: ライセンス
+      url: "/scpivs44_licensing.html"
+    - title: ロールベースアクセス制御（RBAC）
+      url: "/scpivs44_role_based_access_control.html"
+    - title: SnapCenter Plug-in for VMware vSphereユーザ向けのRBACのタイプ
+      url: "/scpivs44_types_of_rbac_for_snapcenter_users.html"
+    - title: SnapCenter Plug-in for VMware vSphereのONTAP RBAC機能
+      url: "/scpivs44_ontap_rbac_features_in_snapcenter.html"
+    - title: SnapCenter Plug-in for VMware vSphereに付属の事前定義されたロール
+      url: "/scpivs44_predefined_roles_packaged_with_snapcenter.html"
+    - title: SnapCenter Plug-in for VMware vSphere用にONTAP RBACを設定する方法
+      url: "/scpivs44_how_to_configure_ontap_rbac_for_snapcenter_plug-in_for_vmware_vsphere.html"
+  - title: 開始する
+    entries:
+    - title: 導入の概要
+      url: "/scpivs44_get_started_overview.html"
+    - title: 新規ユーザ向けの導入ワークフロー
+      url: scpivs44_deployment_workflow_for_new_users.html
+    - title: 既存ユーザ向けの導入ワークフロー
+      url: "/scpivs44_deployment_workflow_for_existing_users.html"
+    - title: SCVの導入要件
+      entries:
+      - title: 導入の計画と要件
+        url: "/scpivs44_deployment_planning_and_requirements.html"
+      - title: ONTAP Privilegesが必要です
+        url: "/scpivs44_minimum_ontap_privileges_required.html"
+      - title: vCenter Privilegesの最小要件
+        url: "/scpivs44_minimum_vcenter_privileges_required.html"
+    - title: Open Virtual Appliance（OVA；オープン仮想アプライアンス）のダウンロード
+      url: "/scpivs44_download_the_ova_open_virtual_appliance.html"
+    - title: SnapCenter Plug-in for VMware vSphereの導入
+      url: "/scpivs44_deploy_snapcenter_plug-in_for_vmware_vsphere.html"
+    - title: 導入後に必要な処理と問題
+      url: "/scpivs44_post_deployment_required_operations_and_issues.html"
+    - title: SnapCenter VMware vSphere Clientにログインします。
+      url: "/scpivs44_log_in_to_the_snapcenter_vmware_vsphere_web_client.html"
+  - title: クイックスタート
+    entries:
+    - title: 概要
+      url: "/scpivs44_quick_start_overview.html"
+    - title: SnapCenter Plug-in for VMware vSphereの導入
+      url: "/scpivs44_deploy_snapcenter_plug-in_for_vmware_vsphere_01.html"
+    - title: ストレージの追加
+      url: "/scpivs44_add_storage.html"
+    - title: バックアップポリシーの作成
+      url: "/scpivs44_create_backup_policies.html"
+    - title: リソースグループの作成
+      url: "/scpivs44_create_resource_groups.html"
+  - title: 監視とレポート
+    entries:
+    - title: ステータス情報の表示
+      url: "/scpivs44_view_status_information.html"
+    - title: ジョブの監視
+      url: "/scpivs44_monitor_jobs.html"
+    - title: ジョブログをダウンロード
+      url: "/scpivs44_download_job_logs.html"
+    - title: レポートへのアクセス
+      url: "/scpivs44_access_reports.html"
+    - title: SnapCenter Plug-in for VMware vSphere GUIからのサポートバンドルの生成
+      url: "/scpivs44_generate_a_support_bundle_from_the_snapcenter_plug-in_for_vmware_vsphere_gui.html"
+    - title: メンテナンスコンソールからサポートバンドルを生成する
+      url: "/scpivs44_generate_a_support_bundle_from_the_maintenance_console.html"
+    - title: 監査ログ
+      url: "/scv48_audit_logs.html"
+  - title: ストレージの管理
+    entries:
+    - title: ストレージの追加
+      url: "/scpivs44_add_storage_01.html"
+    - title: Storage VMの管理-変更、名前変更、削除
+      url: "/scpivs44_manage_storage_systems.html"
+    - title: 設定されているストレージタイムアウトを変更する
+      url: "/scpivs44_modify_storage_timeout.html"
+  - title: データの保護
+    entries:
+    - title: データ保護のワークフロー
+      url: "/scpivs44_protect_data_overview.html"
+    - title: バックアップの表示
+      url: "/scpivs44_view_vm_and_datastore_backups.html"
+    - title: バックアップポリシーの作成
+      url: "/scpivs44_create_backup_policies_for_vms_and_datastores.html"
+    - title: リソースグループの作成
+      url: "/scpivs44_create_resource_groups_for_vms_and_datastores.html"
+    - title: プリスクリプトとポストスクリプト
+      url: "/scpivs44_prescripts_and_postscripts.html"
+    - title: 単一のVMまたはデータストアをリソースグループに追加する
+      url: "/scpivs44_add_a_single_vm_or_datastore_to_a_resource_group.html"
+    - title: リソースグループへの複数のVMとデータストアの追加
+      url: "/scpivs44_add_multiple_vms_and_datastores_to_a_resource_group.html"
+    - title: ストレージの名前変更
+      url: "/rename_storage.html"
+    - title: オンデマンドでリソースグループをバックアップ
+      url: "/scpivs44_back_up_resource_groups_on_demand.html"
+    - title: MySQLデータベースをバックアップする
+      url: "/scpivs44_back_up_the_snapcenter_plug-in_for_vmware_vsphere_mysql_database.html"
+    - title: リソースグループの管理-一時停止'再開'変更'削除
+      url: "/scpivs44_manage_resource_groups.html"
+    - title: ポリシーの管理 - 適用解除、変更、削除
+      url: "/scpivs44_manage_policies.html"
+    - title: バックアップの管理 - 名前変更、削除
+      url: "/scpivs44_manage_backups.html"
+  - title: データストアのマウントとアンマウント
+    entries:
+    - title: バックアップのマウント
+      url: "/scpivs44_mount_a_backup.html"
+    - title: バックアップのアンマウント
+      url: "/scpivs44_unmount_a_backup.html"
+  - title: バックアップのリストア
+    entries:
+    - title: 概要
+      url: "/scpivs44_restore_from_backups_overview.html"
+    - title: リストア処理の実行方法
+      url: "/scpivs44_how_restore_operations_are_performed.html"
+    - title: バックアップの検索
+      url: "/scpivs44_search_for_backups.html"
+    - title: バックアップからのVMのリストア
+      url: "/scpivs44_restore_vms_from_backups.html"
+    - title: 削除したVMをバックアップからリストア
+      url: "/scpivs44_restore_deleted_vms_from_backups.html"
+    - title: バックアップからのVMDKのリストア
+      url: "/scpivs44_restore_vmdks_from_backups.html"
+    - title: MySQLデータベースの最新のバックアップをリストアする
+      url: "/scpivs44_restore_the_most_recent_backup_of_the_mysql_database.html"
+    - title: MySQLデータベースの特定のバックアップをリストアする
+      url: "/scpivs44_restore_a_specific_backup_of_the_mysql_database.html"
+  - title: VMDKの接続と接続解除
+    entries:
+    - title: VMまたはVVOL VMへのVMDKの接続
+      url: "/scpivs44_attach_vmdks_to_a_vm.html"
+    - title: 仮想ディスクの接続解除
+      url: "/scpivs44_detach_a_virtual_disk.html"
+  - title: ゲストファイルとフォルダのリストア
+    entries:
+    - title: ワークフロー、前提条件、および制限事項
+      url: "/scpivs44_restore_guest_files_and_folders_overview.html"
+    - title: VMDKからのゲストファイルとフォルダのリストア
+      url: "/scpivs44_restore_guest_files_and_folders_from_vmdks.html"
+    - title: リストア処理用のプロキシVMのセットアップ
+      url: "/scpivs44_set_up_proxy_vms_for_restore_operations.html"
+    - title: VMゲストファイルのリストア用のクレデンシャルの設定
+      url: "/scpivs44_configure_credentials_for_vm_guest_file_restores.html"
+    - title: ゲストファイルリストアセッションの時間を延長する
+      url: "/scpivs44_extend_the_time_of_a_guest_file_restore_session.html"
+    - title: ゲストファイルのリストアシナリオ
+      url: "/scpivs44_guest_file_restore_scenarios_you_might_encounter.html"
+  - title: SnapCenter Plug-in for VMware vSphereアプライアンスを管理します。
+    entries:
+    - title: VMware vSphere Client Serviceを再起動します。
+      url: "/scpivs44_restart_the_vmware_vsphere_web_client_service.html"
+    - title: メンテナンスコンソールへのアクセス
+      url: "/scpivs44_access_the_maintenance_console.html"
+    - title: メンテナンスコンソールからSnapCenter Plug-in for VMware vSphereのパスワードを変更する
+      url: "/scpivs44_modify_plugin_password.html"
+    - title: 証明書の作成とインポート
+      url: "/scpivs44_create_and_import_certificates.html"
+    - title: vCenterからSnapCenter Plug-in for VMware vSphereの登録解除
+      url: "/scpivs44_unregister_plugin_from_vcenter.html"
+    - title: SnapCenter Plug-in for VMware vSphereを無効にして有効にする
+      url: "/scpivs44_disable_and_enable_plugin.html"
+    - title: SnapCenter Plug-in for VMware vSphereの削除
+      url: "/scpivs44_remove_plugin.html"
+  - title: 構成の管理
+    entries:
+    - title: タイムゾーンの変更
+      url: "/scpivs44_modify_the_time_zones.html"
+    - title: ログオン資格情報の変更
+      url: "/scpivs44_modify_the_logon_credentials.html"
+    - title: vCenterログオンクレデンシャルの変更
+      url: "/scpivs44_modify_the_vcenter_logon_credentials.html"
+    - title: ネットワーク設定の変更
+      url: "/scpivs44_modify_the_network_settings.html"
+    - title: 設定のデフォルト値を変更します。
+      url: "/scpivs44_modify_configuration_default_values.html"
+    - title: scbr.overrideファイルを作成する
+      url: "/scpivs44_create_the_scbr_override_file.html"
+    - title: 上書き可能な設定プロパティ
+      url: "/scpivs44_properties_you_can_override.html"
+    - title: SSH を有効にする
+      url: "/scpivs44_enable_ssh.html"
+  - title: REST API
+    entries:
+    - title: 概要
+      url: "/scpivs44_rest_apis_overview.html"
+    - title: Swagger API Webページを使用したREST APIへのアクセス
+      url: "/scpivs44_access_rest_apis_using_the_swagger_api_web_page.html"
+    - title: Storage VMを追加および変更するためのREST APIワークフロー
+      url: "/scpivs44_rest_api_workflows__add_and_modify_storage_vms.html"
+    - title: リソースグループを作成および変更するためのREST APIワークフロー
+      url: "/scpivs44_rest_api_workflows__create_and_modify_resource_groups.html"
+    - title: オンデマンドでバックアップするREST APIのワークフロー
+      url: "/scpivs44_rest_api_workflow__back_up_on_demand.html"
+    - title: VMをリストアするためのREST APIのワークフロー
+      url: "/scpivs44_rest_api_workflow__restore_vms.html"
+    - title: 削除したVMをリストアするためのREST APIワークフロー
+      url: "/scpivs44_rest_api_workflow__restore_deleted_vms.html"
+    - title: VMDKをリストアするためのREST APIのワークフロー
+      url: "/scpivs44_rest_api_workflow__restore_vmdks.html"
+    - title: VMDKを接続および接続解除するREST APIワークフロー
+      url: "/scpivs44_rest_api_workflows__attach_and_detach_vmdks.html"
+    - title: REST APIワークフローによるデータストアのマウントとアンマウント
+      url: "/scpivs44_rest_api_workflows__mount_and_unmount_datastores.html"
+    - title: ジョブのダウンロードとレポートの生成に使用するREST API
+      url: "/scpivs44_rest_apis__download_jobs_and_generate_reports.html"
+    - title: 組み込みのスケジュールを変更するREST APIワークフロー
+      url: "/scpivs44_rest_api_workflows__modify_built-in_schedules.html"
+    - title: 停止したジョブを失敗としてマークするREST API
+      url: "/scpivs44_rest_apis_fail_stuck_jobs.html"
+    - title: 監査ログを生成するREST API
+      url: "/scpivs48_rest_apis_audit_logs.html"
+  - title: アップグレード
+    entries:
+    - title: 以前のリリースのSnapCenter Plug-in for VMware vSphereからのアップグレード
+      url: "/scpivs44_upgrade.html"
+    - title: 同じリリースの新しいパッチにアップグレードする
+      url: "/scpivs44_upgrade_to_a_new_patch.html"
+    - title: 同じリリースの新しいパッチにアップグレードしたあとに情報が表示されない
+      url: "/scpivs44_information_not_displayed_after_upgrading_to_a_new_patch_of_the_same_release.html"
+  - title: 法的通知
+    url: "/legal-notices.html"

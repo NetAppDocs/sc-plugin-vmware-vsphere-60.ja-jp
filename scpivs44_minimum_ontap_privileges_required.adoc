@@ -1,0 +1,89 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_minimum_ontap_privileges_required.html 
+keywords:  
+summary: 必要な最小ONTAP Privilegesは、データ保護に使用するSnapCenterプラグインによって異なります。 
+---
+= ONTAP Privilegesが必要です
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+必要な最小ONTAP Privilegesは、データ保護に使用するSnapCenterプラグインによって異なります。
+
+
+NOTE: SnapCenter Plug-in for VMware（SCV）5.0以降では、SCVへのカスタマイズされたロールベースアクセスを持つすべてのONTAPユーザに対して、HTTPおよびONTAPIタイプのアプリケーションをユーザのログイン方法として追加する必要があります。これらのアプリケーションにアクセスできないと、バックアップは失敗します。ONTAPユーザのログイン方法の変更を認識するには、SCVサービスを再起動する必要があります。
+
+
+
+== 最小ONTAP Privilegesが必要
+
+すべてのSnapCenterプラグインに必要な最小Privilegesは次のとおりです。
+
+|===
+
+
+| フルアクセスコマンド：ONTAP 8.3以降で必要な最小限の権限。 
+
+
+| イベント生成- AutoSupportログ 
+
+
+| job history show job show job stop 
+
+
+| lun lun create lun delete lun igroup add lun igroup create lun igroup delete lun igroup rename lun igroup rename lun igroup show lun mapping add-reporting-nodes lun mapping create lun mapping remove-reporting-nodes lun mapping show lun modify lun move-in-volume LUN offline LUN online lun persistent-reservation clear lun resize lun serial lun show をクリックします 
+
+
+| snapmirror list-destinations snapmirror policy add-rule snapmirror policy modify -rule snapmirror policy show snapmirror restore snapmirror show -history snapmirror update snapmirror update-ls-set 
+
+
+| バージョン 
+
+
+| volume clone create volume clone show volume clone split start volume clone split stop volume create volume delete volume destroy volume file clone create volume file show -disk-usage volume offline volume online volume modify volume qtree create volume qtree delete volume qtree modify volume qtree show volume restrict volume show volume snapshot create volume snapshot delete volume snapshot modify volume snapshot rename volume snapshot restore volume snapshot restore -file volume snapshot show volume unmount 
+
+
+| vserver cifs vserver cifs share create vserver cifs share delete vserver cifs shadowcopy show vserver cifs share show vserver cifs share show vserver cifs share show vserver export-policy vserver export-policy create vserver export-policy rule create vserver export-policy rule show vserver export-policy show vserver iscsi vserver iscsi connection show vserver nvme subsystem controller vserver nvme subsystem controller show vserver nvme subsystem map vserver nvme subsystem map show vserver nvme subsystem map add vserver nvme subsystem map remove vserver nvme subsystem host add vserver nvme subsystem host delete vserver nvme namespace network interface network interface failover-groupsを表示します。 
+|===
+|===
+| 読み取り専用コマンド： ONTAP 8.3 以降で必要な最小権限 
+
+
+| cluster identity show network interface show vserver peer vserver show 
+|===
+データSVMに関連付けるロールを作成する場合は、_cluster identity show_cluster levelコマンドは無視してかまいません。
+
+
+NOTE: サポートされていないvServerコマンドに関する警告メッセージは無視してかまいません。
+
+
+
+== ONTAPに関するその他の情報
+
+* ONTAP 8.2.xを実行している場合：
++
+SnapCenter Plug-in for VMware vSphereの処理を実行するための適切な権限を割り当てるには、Storage VMにとしてログインする必要があります `vsadmin` 。
+
+* ONTAP 8.3以降を実行している場合：
++
+またはとして、上記の表に記載されている最小限の権限を持つロールでログインする必要があります `vsadmin` 。
+
+* ユーザロールを作成および管理するには、クラスタ管理者である必要があります。ユーザをクラスタStorage VMまたはStorage VMに関連付けることができます。
+* SnapMirrorアクティブ同期機能を使用するには、ONTAP 9.12.1以降のバージョンが必要です。
+* 改ざん防止スナップショット（TPS）機能を使用するには、次の手順を実行します。
++
+** SANにはONTAP 9.13.1以降のバージョンが必要です。
+** NFSにはONTAP 9.12.1以降のバージョンが必要です。
+
+
+* NVMe over TCPおよびNVMe over FCプロトコルを使用するには、ONTAP 9 10.1以降が必要です。
+
+
+
+NOTE: ONTAPバージョン9.11.1以降では、REST APIを使用してONTAPクラスタと通信します。ONTAPユーザは、httpアプリケーションを有効にしておく必要があります。ただし、ONTAP REST APIで問題が見つかった場合は、設定キー「force_zapi」を使用して従来のZAPIワークフローに切り替えることができます。設定APIを使用してこのキーを追加または更新し、trueに設定する必要がある場合があります。詳細については、技術情報の記事を参照して https://kb.netapp.com/mgmt/SnapCenter/How_to_use_RestAPI_to_edit_configuration_parameters_in_SCV["RestAPIを使用してSCVの設定パラメータを編集する方法"] ください。

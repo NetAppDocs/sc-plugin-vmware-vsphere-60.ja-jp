@@ -1,0 +1,51 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_restart_the_vmware_vsphere_web_client_service.html 
+keywords:  
+summary: SnapCenter VMware vSphere Clientの動作が正しくない場合は、ブラウザキャッシュのクリアが必要になることがあります。問題が解決しない場合は、Webクライアントサービスを再起動します。 
+---
+= VMware vSphere Client Serviceを再起動します。
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+SnapCenter VMware vSphere Clientの動作が正しくない場合は、ブラウザキャッシュのクリアが必要になることがあります。問題が解決しない場合は、Webクライアントサービスを再起動します。
+
+
+
+== Linux vCenterでVMware vSphere Client Serviceを再起動する
+
+.開始する前に
+vCenter 7.0U1以降を実行している必要があります。
+
+.手順
+. SSHを使用してvCenter Server Applianceにrootとしてログインします。
+. 次のコマンドを使用して、アプライアンスシェルまたはbashシェルにアクセスします。
++
+`shell`
+
+. 次のHTML5コマンドを使用してWeb Client Serviceを停止します。
++
+`service-control --stop vsphere-ui`
+
+. 次のシェルコマンドを使用して、vCenterで古いHTML5 scvmパッケージをすべて削除します。
++
+`etc/vmware/vsphere-ui/vc-packages/vsphere-client-serenity/`
+
++
+`rm -rf com.netapp.scv.client-<version_number>`
+
++
+
+IMPORTANT: VASAまたはvCenter 7.x以降のパッケージは削除しないでください。
+
+. 次のHTML5コマンドを使用してWebクライアントサービスを開始します。
++
+`service-control --start vsphere-ui`
+
+

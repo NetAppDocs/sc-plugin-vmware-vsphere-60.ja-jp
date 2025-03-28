@@ -1,0 +1,29 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_rest_api_workflow__back_up_on_demand.html 
+keywords:  
+summary: SnapCenter Plug-in for VMware vSphere REST APIを使用してバックアップ処理をオンデマンドで実行するには、所定の順序でREST API呼び出しを実行する必要があります。 
+---
+= オンデマンドでバックアップするREST APIのワークフロー
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+SnapCenter Plug-in for VMware vSphere REST APIを使用してバックアップ処理をオンデマンドで実行するには、所定の順序でREST API呼び出しを実行する必要があります。
+
+各REST APIについて、REST APIの先頭にを追加し `\https://<server>:<port>` て完全なエンドポイントを形成します。
+
+|===
+| ステップ | REST API | コメント 
+
+
+| 1 | `/4.1/resource-groups` | `Get List of Resource Groups` VMware vSphereクライアントのリソースグループのリストを取得します。バックアップするリソースグループの * resourceGroupId * と * policyId * をメモします 
+
+
+| 2 | `/4.1/resource-groups/backupnow` | `Run a backup on a Resource Group` リソースグループをオンデマンドでバックアップします。手順 1 の * resourceGroupId* と * policyId* を渡します 
+|===
