@@ -336,7 +336,6 @@
   <block id="1d92d0cbfdf6166c05997268d3378fe0" category="list-text">リンクモード</block>
   <block id="35f1c688325b0062756b2d7b0d00be28" category="paragraph">リンクモードでは、各vCenterに個別の仮想アプライアンスがあります。そのため、複数のvCenterで重複した名前を使用できます。ただし、ポリシーはリソースグループと同じvCenterで作成する必要があります。</block>
   <block id="9efc9e0c08da510b5195bb9dc4b1b7c2" category="list-text">サポートされない文字</block>
-  <block id="69a02b2d668a0ebee1d9ac100a00074c" category="paragraph">VM 、データストア、クラスタ、ポリシー、バックアップ、 またはリソースグループ名： %&amp;*$#@ ！\ / ： * ？"&lt;&gt; - | ； ' 、。</block>
   <block id="a051f3eeac4a83ec1f5d55c7aeba6f06" category="paragraph">アンダースコア（_）を使用できます。</block>
   <block id="6e0b19728555d1c2b7bc98ce7895aced" category="list-text">頻度の設定を指定します。</block>
   <block id="52b19e85e6a29b6fe5690f47944f859f" category="paragraph">ポリシーではバックアップの頻度のみを指定します。バックアップの具体的な保護スケジュールは、リソースグループで定義します。そのため、複数のリソースグループで同じポリシーとバックアップ頻度を共有していても、バックアップスケジュールが異なる場合があります。</block>
@@ -420,7 +419,6 @@
   <block id="c4436d4a190778b7ec1e9461f6454bdd" category="cell">vCenter Server</block>
   <block id="df86b612dee850ddbf3bd636d14cd09e" category="cell">vCenterサーバを選択します。</block>
   <block id="49ee3087348e8d44e1feda1917443987" category="cell">名前</block>
-  <block id="b6f45f1c26b5dc8cfcdcf884b55437e0" category="cell">リソースグループの名前を入力します。VM 、データストア、ポリシー、バックアップ、リソースグループの名前には、次の特殊文字は使用できません： %&amp;*$#@ ！\ / ： * ？"&lt;&gt; - [ 垂直バー ] ； ' 、アンダースコア（_）を使用できます。特殊文字を含むVMまたはデータストアの名前は切り捨てられるため、特定のバックアップを検索することが困難になります。リンクモードでは、各vCenterに個別のSnapCenter Plug-in for VMware vSphereリポジトリがあります。そのため、複数のvCenterで重複した名前を使用できます。</block>
   <block id="b1358d1843f648e7ea781a21a690cdd0" category="cell">リソースグループの説明を入力します。</block>
   <block id="96d008db67fc0b5551a926842bbb6a71" category="cell">通知</block>
   <block id="3a703c8a96e830eedbe6543218be1f6d" category="cell">このリソースグループ上の処理に関する通知を受信する場合に選択します。エラーまたは警告：エラーおよび警告のみの通知を送信：エラーのみの通知を送信：すべてのメッセージタイプの通知を送信しない：通知を送信しません</block>
@@ -996,7 +994,6 @@
   <block id="e3c333b91de412cbe4acc72a0b293a5f" category="paragraph"><block ref="e3c333b91de412cbe4acc72a0b293a5f" category="inline-image-macro-rx" type="image"></block></block>
   <block id="1d25235da54411fda3f47e1c47b94db2" category="list-text">[ 構成 ] タブでバックアップを選択し、 [* 名前の変更 *] をクリックします。</block>
   <block id="27947ec6e4013d1b08faee7e509cae9e" category="list-text">[ バックアップ名の変更 *] ダイアログボックスで新しい名前を入力し、 [OK] をクリックします。</block>
-  <block id="f8ffb952d62ac560c6adb8ac7e15a58e" category="paragraph">VM 、データストア、ポリシー、バックアップ、リソースグループの名前には、次の特殊文字は使用できません。 * $#@ ！\ / ： * ？"&lt;&gt; - | ； ' 、。アンダースコア（_）を使用できます。</block>
   <block id="de00c1e27be1485dd099e4cd2aaa554d" category="section-title">バックアップの削除</block>
   <block id="811a38ca6a4a37270419c2834515cf5c" category="paragraph">他のデータ保護処理に不要になったSnapCenter Plug-in for VMware vSphereのバックアップは削除できます。1つのバックアップを削除することも、複数のバックアップを同時に削除することもできます。</block>
   <block id="4b3cb5948249f5d59292e97ced52522d" category="paragraph">マウントされているバックアップは削除できません。削除するには、バックアップをアンマウントする必要があります。</block>
@@ -1046,7 +1043,6 @@
   <block id="86f5d700774abd1b4b1161e6afcd312e" category="section-title">リソースグループの変更</block>
   <block id="1850764f60496630a671ed4a4ca36a90" category="paragraph">vCenterでリソースグループ内のリソースの削除や追加、ポリシーの適用解除や適用、スケジュールの変更、その他のリソースグループオプションの変更を行うことができます。</block>
   <block id="683a572529e7ee01c3f3b2f6e84ee453" category="paragraph">リソースグループの名前を変更する場合は、VM、データストア、ポリシー、バックアップ、またはリソースグループの名前に次の特殊文字を使用しないでください。</block>
-  <block id="bf6bb853aafb837a490acb97d9acbf87" category="paragraph">%&amp;*$#@！\ / ： * ？"&lt;&gt; - | ； ' 、。</block>
   <block id="bc967eed1e1f8494f71a02de0d06a1ba" category="list-text">[ リソースグループの編集 ] ウィザードの左側のリストで、変更するカテゴリをクリックし、変更を入力します。</block>
   <block id="e71911e6fc1645b76466cbac653dbb12" category="paragraph">複数のカテゴリに変更を加えることができます。</block>
   <block id="cb0503d668bf3e03dd4da3d424936f20" category="list-text">[ 概要 ] ページが表示されるまで [ 次へ ] をクリックし、 [ 完了 ] をクリックします。</block>
@@ -2161,4 +2157,8 @@
   <block id="a3d53cfe9124531cb5f9bbfefe704326" category="sidebar">組み込みのスケジュールを変更するREST APIワークフロー</block>
   <block id="3da6944b1baaec4beb70694ac307fd1f" category="sidebar">同じリリースの新しいパッチにアップグレードする</block>
   <block id="88464b0f22e28142bc76c51bba424a64" category="cell">NFS環境: ONTAP SnapMirrorリストア VMFS環境: Storage VMotionによるクローン作成とマウント</block>
+  <block id="2c6c18c9ea36047e0562b8c63f8cdc3b" category="paragraph">VM 、データストア、クラスタ、ポリシー、バックアップ、 またはリソースグループ名： %&amp;*$#@ ！\ / ： * ？" &lt; &gt; - | ; ' 、およびスペース。</block>
+  <block id="60894c2f861771ba620b772dde49422e" category="cell">リソース グループの名前を入力します。VM 、データストア、ポリシー、バックアップ、リソースグループの名前には、次の特殊文字は使用できません： %&amp;*$#@ ！\ / ： * ？" &lt; &gt; - [縦棒] ; ' 、およびスペース。アンダースコア文字 (_) を使用できます。特殊文字を含むVMまたはデータストア名は切り捨てられるため、特定のバックアップの検索が困難になります。リンクモードでは、各vCenterに個別のSnapCenter Plug-in for VMware vSphereリポジトリが存在します。そのため、vCenter間で重複した名前を使用できます。</block>
+  <block id="9d9d361ca66b8af5110eb490c5e40c1a" category="paragraph">VM 、データストア、ポリシー、バックアップ、リソースグループの名前には、次の特殊文字は使用できません。 * $#@ ！\ / ： * ？" &lt; &gt; - | ; ' 、およびスペース。アンダースコア文字 (_) も使用できます。</block>
+  <block id="8651a2d0c6ade87f04ae0bca90386289" category="paragraph">% &amp; * $ # @ ! \ / ： * ？" &lt; &gt; - | ; ' 、およびスペース。アンダースコア文字 (_) が許可されます。</block>
 </blocks>
